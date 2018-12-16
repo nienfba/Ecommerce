@@ -102,7 +102,7 @@ class MicroKernel
             // Send HTTP response and turn off output buffering.
             ob_end_flush();
         }
-        catch(Exception $exception)
+        catch(Error | Exception $exception)
         {
             // Destroy any output buffer contents that could have been added.
             ob_clean();

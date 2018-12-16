@@ -9,13 +9,13 @@ class AddController
         $productId = $queryFields['productid'];
         /** On a aussi besoin du produit pour l'afficher dans le titre et garder le lien */
 		$productModel = new ProductsModel();
-		$product = $productModel->find($productId);
+		$product = $productModel->find();
 
         $form = new VariationsForm();
         $form->bind(['productid'=>$productId]);
         
         return [
-			'title'=> 'Ajouter une variation',
+			'title'=> 'Ajouter une variation---',
             'active'=>'addProduct',
             'product'=>$product,
             '_form' => $form
