@@ -16,12 +16,31 @@
             <label for="description">Description :</label>
             <textarea class="form-control" id="description" name="description" rows="15"><?=$description?></textarea>
         </div>
-        <div class="form-group row">
-            <label for="price">Prix :</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" aria-label="Price" id="price" name="price" value="<?=$price?>">
-                <div class="input-group-append">
-                    <span class="input-group-text">€</span>
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="price">Prix :</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" aria-label="Price" id="price" name="price" value="<?=$price?>">
+                        <div class="input-group-append">
+                            <span class="input-group-text">€</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="tva">TVA</label>
+                    <div class="input-group mb-3">
+                        <select class="form-control" id="tva" name="tva">
+                            <option value="20" <?php if ($tva == 20):?>selected<?php endif;?>>20</option>
+                            <option value="10" <?php if ($tva == 10):?>selected<?php endif;?>>10</option>
+                            <option value="5.5"  <?php if ($tva == 5.5):?>selected<?php endif;?>>5.5</option>
+                        </select>
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

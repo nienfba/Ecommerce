@@ -8,7 +8,8 @@
             <th>Nom</th>
             <th>Sous titre</th>
             <th>Image</th>
-            <th>Prix</th>
+            <th>Prix € HT</th>
+            <th>TVA</th>
             <th>Categorie</th>
             <th></th>
         </thead>
@@ -25,8 +26,9 @@
                         <?php endif;?>
                     </td>
                     <td><?=$product['prod_price']?> €</td>
+                    <td><?=$product['prod_tva']?> %</td>
                     <td><?=$product['cat_name']?></td>
-                    <td><a href="<?= $requestUrl ?>/admin/products/var/?id=<?=$product['prod_id']?>" alt="Variations"><i class="fas fa-list"></i></a> <a href="<?= $requestUrl ?>/admin/products/edit/?id=<?=$product['prod_id']?>"><i class="fas fa-edit"></i></a> <a href="<?= $requestUrl ?>/admin/products/del/?id=<?=$product['prod_id']?>"  data-toggle="modal" data-target="#delete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a href="<?= $requestUrl ?>/admin/products/variations/?productid=<?=$product['prod_id']?>" alt="Variations"><i class="fas fa-list"></i></a> <a href="<?= $requestUrl ?>/admin/products/edit/?id=<?=$product['prod_id']?>"><i class="fas fa-edit"></i></a> <a href="<?= $requestUrl ?>/admin/products/del/?id=<?=$product['prod_id']?>"  data-toggle="modal" data-target="#delete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             <?php endforeach;?>
         </tbody>

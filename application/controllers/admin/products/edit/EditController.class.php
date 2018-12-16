@@ -20,7 +20,7 @@ class EditController
         $categories = $modelCat->listAll();
 
         $form = new ProductsForm();
-        $form->bind(array('name'=>$product['prod_name'],'subtitle'=>$product['prod_subtitle'],'description'=>$product['prod_description'],'price'=>$product['prod_price'],'categoryId'=>$product['category_cat_id'],'id'=>$product['prod_id'],'originalpicture'=>$product['prod_picture']));
+        $form->bind(array('name'=>$product['prod_name'],'subtitle'=>$product['prod_subtitle'],'description'=>$product['prod_description'],'price'=>$product['prod_price'],'tva'=>$product['prod_tva'],'categoryId'=>$product['category_cat_id'],'id'=>$product['prod_id'],'originalpicture'=>$product['prod_picture']));
 	
         return[
 			'title'=>'Editer un produit',
@@ -38,6 +38,10 @@ class EditController
             /** Récupération de la photo originale */
             if ($http->hasUploadedFile('picture')) {
                 $picture = $http->moveUploadedFile('picture','/uploads/products'); //On déplace la photo à l'endroit désiré(le chemin est relatif par rapport au dossier www)et on stocke dans la variable photo le nom du fichier
+                /** On supprime l'ancienne image */
+                if($formFields['originalpicture']!=NULL && file_exists(WWW_PATH.'/uploads/products/'.$formFields['originalpicture'])){
+                    unlink(WWW_PATH.'/uploads/products/'.$formFields['originalpicture']);
+                }
             } else {
                 $picture = $formFields['originalpicture']; // Le nom de l'image reste le nom qui était là à l'origine
             }
@@ -56,7 +60,7 @@ class EditController
             
             /** Enregistrer les données dans la base de données */
             $productModel = new ProductsModel();
-            $productModel->update($formFields['id'], $formFields['name'], $formFields['subtitle'],$formFields['description'], $formFields['price'], $picture,$formFields['categoryId']);
+            $productModel->update($formFields['id'], $formFields['name'], $formFields['subtitle'],$formFields['description'], $formFields['price'],$formFields['tva'], $picture,$formFields['categoryId']);
             
             /** Ajout du flashbag */
             $flashbag = new Flashbag();

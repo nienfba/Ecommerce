@@ -1,7 +1,4 @@
 <?php
-/**
- * prod_id 	prod_name 	prod_subtitle 	prod_description 	prod_createdDate 	prod_price 	prod_picture 	category_cat_id 
- */
 class ProductsModel
 {
 
@@ -41,17 +38,17 @@ class ProductsModel
      * @param string $name nom 
      * @param string $subtitle description
      * @param string $description description
-     * @param string $createdDate description
-     * @param string $price description
+     * @param date $createdDate description
+     * @param float $price description
      * @param string $picture nom de l'image
-     * @param string $categoryId id de la catégorie auquel est rattaché le produit
+     * @param integer $categoryId id de la catégorie auquel est rattaché le produit
      */
-    public function add($name, $subtitle, $description, $createdDate, $price, $picture, $categoryId) 
+    public function add($name, $subtitle, $description, $createdDate, $price, $tva, $picture, $categoryId) 
     {
-        return $this->dbh->executeSQL('INSERT INTO '.$this->table.' (prod_name, prod_subtitle,prod_description,prod_createdDate,prod_price,prod_picture,category_cat_id) VALUES (?,?,?,?,?,?,?)',[$name, $subtitle, $description, $createdDate, $price, $picture, $categoryId]);
+        return $this->dbh->executeSQL('INSERT INTO '.$this->table.' (prod_name, prod_subtitle,prod_description,prod_createdDate,prod_price,prod_tva,prod_picture,category_cat_id) VALUES (?,?,?,?,?,?,?,?)',[$name, $subtitle, $description, $createdDate, $price, $tva, $picture, $categoryId]);
     }
 
-    /** Trouve une catégorie avec son ID
+    /** Trouve un produit avec son ID
      *
      * @param integer $id identifiant du produit
      * @return Array Jeu d'enregistrement comportant le produit
@@ -68,14 +65,14 @@ class ProductsModel
      * @param string $name nom 
      * @param string $subtitle description
      * @param string $description description
-     * @param string $price description
+     * @param float $price description
      * @param string $picture nom de l'image
-     * @param string $categoryId id de la catégorie auquel est rattaché le produit
+     * @param integer $categoryId id de la catégorie auquel est rattaché le produit
      * @return void
      */
-    public function update($id, $name, $subtitle, $description, $price, $picture, $categoryId)
+    public function update($id, $name, $subtitle, $description, $price, $tva, $picture, $categoryId)
     {
-        $this->dbh->executeSQL('UPDATE '.$this->table.' SET prod_name=?, prod_subtitle=?,prod_description=?,prod_price=?,prod_picture=?,category_cat_id=? WHERE prod_id=?',[$name, $subtitle, $description, $price, $picture, $categoryId, $id]); 
+        $this->dbh->executeSQL('UPDATE '.$this->table.' SET prod_name=?, prod_subtitle=?,prod_description=?,prod_price=?,prod_tva=?,prod_picture=?,category_cat_id=? WHERE prod_id=?',[$name, $subtitle, $description, $price, $tva, $picture, $categoryId, $id]); 
     }
 
     /** Supprime un produit avec son ID
@@ -85,22 +82,10 @@ class ProductsModel
      */
     public function delete($id)
     {
-        $this->deleteVariation($id);
-        $this->dbh->executeSQL('DELETE FROM '.$this->table.' WHERE prod_id=?',[$id]);
-    }
+        /** On supprime toutes les variations */
+        $productVariations = new VariationsModel();
+        $productVariations->deleteFromProduct($id);
 
-     /** Supprime toutes les variation d'un produit
-     *
-     * @param integer $id identifiant du produit
-     * @return void
-     */
-    public function deleteVariation($id)
-    {
-       /* EN PASSANT PAR LE MODELE
-          $productVariations = new ProductsVariationsModel();
-        $variations = $productVariations->listAll();
-        foreach($variations as $variation)
-            $variation->delete($variation['product_prod_id']); */
-        $this->dbh->executeSQL('DELETE FROM '.$this->table.'variation WHERE product_prod_id=?',[$id]);
+        $this->dbh->executeSQL('DELETE FROM '.$this->table.' WHERE prod_id=?',[$id]);
     }
 }
