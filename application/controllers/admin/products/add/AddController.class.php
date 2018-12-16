@@ -4,14 +4,17 @@ class AddController
 {
     public function httpGetMethod(Http $http, array $queryFields)
     {
-        /** En méthode GET on passe les variables nécessaire à la vue pour éviter les erreurs NOTICE variable undefined
-         * Donc title, active (pour la page active dans le menu) et le formulaire pour que le framework 
-         * nous fournisse les variables du formulaie dans la vue
-         */
+       
+        /** On sélectionne toutes les catégories pour les afficher dans le form */
+        $modelCat = new CategoriesModel();
+        $categories = $modelCat->listAll();
+
+
         return [
-			'title'=>'Ajouter une catégorie',
-            'active'=>'addCategory',
-            '_form' => new CategoriesForm()
+			'title'=>'Ajouter un produit',
+            'active'=>'addProduct',
+            '_form' => new ProductsForm(),
+            'categories' => $categories
         ];
     }
 
@@ -24,7 +27,7 @@ class AddController
             *   On la déplace sinon on affecte à NULL pour la saisie en base
             */
             if ($http->hasUploadedFile('picture'))
-                $picture = $http->moveUploadedFile('picture','/uploads/categories');
+                $picture = $http->moveUploadedFile('picture','/uploads/products');
             else 
                 $picture = NULL;
 
@@ -33,19 +36,25 @@ class AddController
              * C'est le contrôleur qui contrôle les données et non le modèle !
              * Si les champs sont vides on lance un exception pour réafficher le formulaire et les erreurs !
             */
-            if($formFields['name'] == '' ||  $formFields['contents'] == '')
-                throw new DomainException('Merci de saisir le champ nom et contenu !');
+             /** On vérifie que tous les champs sont remplis sauf subtitle*/
+            foreach($formFields as $index=>$formField)
+            {
+                if (empty($formField) && $index != 'subtitle')
+                    throw new DomainException('Merci de remplir tous les champs !');
+            }
+
+            $createdDate = date('Y-m-d');
 
             /** Enregistrer les données dans la base de données */
-            $categoryModel = new CategoriesModel();
-            $categoryModel->add($formFields['name'], $formFields['contents'], $picture);
+            $productModel = new ProductsModel();
+            $productModel->add($formFields['name'], $formFields['subtitle'],$formFields['description'], $createdDate,$formFields['price'], $picture,$formFields['categoryId']);
             
             /** Ajout du flashbag */
             $flashbag = new Flashbag();
-            $flashbag->add('La catégorie a bien été ajoutée');
+            $flashbag->add('Le produit a bien été ajoutée');
 
             /** Redirection vers la liste des catégories */
-            $http->redirectTo('admin/categories/');
+            $http->redirectTo('admin/products/');
         }
         catch(DomainException $exception)
         {
@@ -54,16 +63,21 @@ class AddController
              *   Exemple : class FormValideException extends Exception {} et faire ensuite un catch(FormValideException $exception)
              */
 
+              /** On sélectionne toutes les catégories pour les afficher dans le form */
+            $modelCat = new CategoriesModel();
+            $categories = $modelCat->listAll();
+
             /** Réaffichage du formulaire avec un message d'erreur. */
-            $form = new CategoriesForm();
+            $form = new ProductsForm();
             /** On bind nos données $_POST ($formFields) avec notre objet formulaire */
             $form->bind($formFields);
             $form->setErrorMessage($exception->getMessage());
             
             return [ 
-                'title'=>'Ajouter une catégorie',
-			    'active'=>'addCategory',
-                '_form' => $form 
+                'title'=>'Ajouter un produit',
+			    'active'=>'addProduct',
+                '_form' => $form,
+                'catgories' => $categories
             ]; 
         }
     }

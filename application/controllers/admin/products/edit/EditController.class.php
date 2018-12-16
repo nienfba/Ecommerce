@@ -12,16 +12,21 @@ class EditController
     	 */
         $id = $queryFields['id'];
         //Récupération des données dans la vue
-        $categoryModel = new CategoryModel();
-        $categorie = $categoryModel->find($id);
+        $productModel = new ProductsModel();
+        $product = $productModel->find($id);
 
-        $form = new CategoriesForm();
-        $form->bind(array('name'=>$categorie['cat_name'],'contents'=>$categorie['cat_description'],'id'=>$categorie['cat_id'],'originalpicture'=>$categorie['cat_picture']));
+        /** On sélectionne toutes les catégories pour les afficher dans le form */
+        $modelCat = new CategoriesModel();
+        $categories = $modelCat->listAll();
+
+        $form = new ProductsForm();
+        $form->bind(array('name'=>$product['prod_name'],'subtitle'=>$product['prod_subtitle'],'description'=>$product['prod_description'],'price'=>$product['prod_price'],'categoryId'=>$product['category_cat_id'],'id'=>$product['prod_id'],'originalpicture'=>$product['prod_picture']));
 	
         return[
-			'title'=>'Editer une catégorie',
-			'active'=>'editCategory',
-            '_form' => $form
+			'title'=>'Editer un produit',
+			'active'=>'editProduct',
+            '_form' => $form,
+            'categories' => $categories
         ];
 
     }
@@ -32,7 +37,7 @@ class EditController
         {
             /** Récupération de la photo originale */
             if ($http->hasUploadedFile('picture')) {
-                $picture = $http->moveUploadedFile('picture','/uploads/categories'); //On déplace la photo à l'endroit désiré(le chemin est relatif par rapport au dossier www)et on stocke dans la variable photo le nom du fichier
+                $picture = $http->moveUploadedFile('picture','/uploads/products'); //On déplace la photo à l'endroit désiré(le chemin est relatif par rapport au dossier www)et on stocke dans la variable photo le nom du fichier
             } else {
                 $picture = $formFields['originalpicture']; // Le nom de l'image reste le nom qui était là à l'origine
             }
@@ -41,21 +46,24 @@ class EditController
              * C'est le contrôleur qui contrôle les données et non le modèle !
              * Si les champs sont vides on lance un exception pour réafficher le formulaire et les erreurs !
             */
-            if($formFields['name'] == '' ||  $formFields['contents'] == '')
-                throw new DomainException('Merci de saisir le champ nom et contenu !');
-            if(!isset($formFields['id']) || $formFields['id'] == '')
-                throw new DomainException('Une erreur inatendu s\'est produite, la catégorie ne peut-être éditée !');
+             /** On vérifie que tous les champs sont remplis sauf subtitle*/
+            foreach($formFields as $index=>$formField)
+            {
+                if (empty($formField) && $index != 'subtitle')
+                    throw new DomainException('Merci de remplir tous les champs !');
+            }
+
             
             /** Enregistrer les données dans la base de données */
-            $categoryModel = new CategoriesModel();
-            $categoryModel->update($formFields['id'], $formFields['name'], $formFields['contents'], $picture);
+            $productModel = new ProductsModel();
+            $productModel->update($formFields['id'], $formFields['name'], $formFields['subtitle'],$formFields['description'], $formFields['price'], $picture,$formFields['categoryId']);
             
             /** Ajout du flashbag */
             $flashbag = new Flashbag();
-            $flashbag->add('La catégorie a bien été modifiée');
+            $flashbag->add('Le produit a bien été modifiée');
             
             /** Redirection vers la liste */
-            $http->redirectTo('admin/categories/');
+            $http->redirectTo('admin/products/');
         }
          catch(DomainException $exception)
         {
@@ -65,15 +73,20 @@ class EditController
              */
 
             /** Réaffichage du formulaire avec un message d'erreur. */
-            $form = new CategoriesForm();
+            $form = new ProductsForm();
             /** On bind nos données $_POST ($formFields) avec notre objet formulaire */
             $form->bind($formFields);
             $form->setErrorMessage($exception->getMessage());
 
+             /** On sélectionne toutes les catégories pour les afficher dans le form */
+            $modelCat = new CategoriesModel();
+            $categories = $modelCat->listAll();
+
             return [ 
-                'title'=>'Editer une catégorie',
-			    'active'=>'editCategory',
-                '_form' => $form 
+               	'title'=>'Editer un produit',
+			    'active'=>'editProduct',
+                '_form' => $form,
+                'categories' => $categories
             ]; 
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-class CategoryModel
+class CategoriesModel
 {
 
     /**
@@ -39,7 +39,6 @@ class CategoryModel
      * @param string $name nom de la catégorie
      * @param string $description description de la cétégorie
      * @param string $picture nom de l'image
-     * @return integer Id de l'élément enregistré
      */
     public function add($name, $description, $picture) 
     {

@@ -10,7 +10,7 @@ class CategoriesController
     	 * L'argument $http est un objet permettant de faire des redirections etc.
     	 * L'argument $queryFields contient l'équivalent de $_GET en PHP natif.
     	 */
-		$categoryModel = new CategoryModel();
+		$categoryModel = new CategoriesModel();
 		//Récupération des données de la BDD
 		$categories = $categoryModel->listAll();
 		//Création du flashbag

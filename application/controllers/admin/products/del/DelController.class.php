@@ -7,25 +7,25 @@ class DelController
 
         $id = $queryFields['id'];
 
-        $categoryModel = new CategoriesModel();
+        $productModel = new ProductsModel();
         
         /** Suppression de la photo attachée à la catégorie */
-        $picture = $categoryModel->find($id);
-        $image = $picture['cat_picture'];
-        if($image != NULL && file_exists(WWW_PATH.'/uploads/categories/'.$image)){
-            unlink(WWW_PATH.'/uploads/categories/'.$image);
+        $picture = $productModel->find($id);
+        $image = $picture['prod_picture'];
+        if($image != NULL && file_exists(WWW_PATH.'/uploads/products/'.$image)){
+            unlink(WWW_PATH.'/uploads/products/'.$image);
         }
 
-        /** Suppression d'une catégorie dans la base */
-        $categorie = $categoryModel->delete($id);
+        /** Suppression du produit dans la base */
+        $productModel->delete($id);
         
         
         /**  Création du flashbag */
         $flashbag = new Flashbag();
-        $flashbag->add('La catégorie a bien été supprimée');
+        $flashbag->add('Le produit et ses déclinaisons a bien été supprimée');
         
         /** Redirige vers la liste des catégories */
-        $http->redirectTo('admin/categories/');
+        $http->redirectTo('admin/products/');
 
     }
 

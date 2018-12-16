@@ -17,6 +17,11 @@
         <div class="form-group row">
             <label for="picture">Image :</label></br>	
             <input class="form-control-file" type="file" name="picture" id="picture" accept="image/png,image/jpeg,image/gif">
+            <?php if(!is_null($originalpicture)):?>
+                <img src="<?= $wwwUrl ?>/uploads/categories/<?=$originalpicture?>"/>
+            <?php else:?>
+                <img src="https://via.placeholder.com/100" />
+            <?php endif;?>
         </div>
 
         <div class="text-center">

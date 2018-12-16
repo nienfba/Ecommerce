@@ -1,0 +1,34 @@
+<section class="table-responsive">
+<p>
+<a class="btn btn-primary" role="button" href="<?= $requestUrl ?>/admin/products/add/"><i class="fas fa-plus-square"></i> Ajouter un produit</a>
+</p>    
+    <table id="tableDonnee" class="table">
+        <thead>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Sous titre</th>
+            <th>Image</th>
+            <th>Prix</th>
+            <th>Categorie</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <?php foreach($products as $product):?>
+                <tr>
+                    <td><?=$product['prod_id']?></td>
+                    <td><?=$product['prod_name']?></td>
+                    <td><?=$product['prod_subtitle']?></td>
+                    <td><?php if(!is_null($product['prod_picture'])):?>
+                            <img width="100" src="<?= $wwwUrl ?>/uploads/products/<?=$product['prod_picture']?>" alt="<?=$product['prod_name']?>" />
+                        <?php else:?>
+                            <img src="https://via.placeholder.com/100" />
+                        <?php endif;?>
+                    </td>
+                    <td><?=$product['prod_price']?> €</td>
+                    <td><?=$product['cat_name']?></td>
+                    <td><a href="<?= $requestUrl ?>/admin/products/var/?id=<?=$product['prod_id']?>" alt="Variations"><i class="fas fa-list"></i></a> <a href="<?= $requestUrl ?>/admin/products/edit/?id=<?=$product['prod_id']?>"><i class="fas fa-edit"></i></a> <a href="<?= $requestUrl ?>/admin/products/del/?id=<?=$product['prod_id']?>"  data-toggle="modal" data-target="#delete"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</section>

@@ -17,7 +17,7 @@
                     <td><?=$categorie['cat_name']?></td>
                     <td><?=$categorie['cat_description']?></td>
                     <td><?php if(!is_null($categorie['cat_picture'])):?>
-                            <img src="<?= $wwwUrl ?>/uploads/category/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
+                            <img src="<?= $wwwUrl ?>/uploads/categories/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
                         <?php else:?>
                             <img src="https://via.placeholder.com/100" />
                         <?php endif;?>

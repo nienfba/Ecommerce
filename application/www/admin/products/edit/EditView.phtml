@@ -1,0 +1,53 @@
+<!-- Formulaire de saisie d'un nouvel article -->
+<?php if ($errorMessage != ''):?>
+    <div class="alert alert-danger"><?=$errorMessage?></div>
+<?php endif; ?>
+<form action="<?= $requestUrl ?>/admin/products/edit/" method="post" enctype="multipart/form-data">
+
+        <div class="form-group row">
+            <label for="name">Nom :</label>
+            <input class="form-control" type="text" id="name" name="name" value="<?=$name?>">
+        </div>
+        <div class="form-group row">
+            <label for="subtitle">Sous titre :</label>
+            <input class="form-control" type="text" id="subtitle" name="subtitle" value="<?=$subtitle?>">
+        </div>
+        <div class="form-group row">
+            <label for="description">Description :</label>
+            <textarea class="form-control" id="description" name="description" rows="15"><?=$description?></textarea>
+        </div>
+        <div class="form-group row">
+            <label for="price">Prix :</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Price" id="price" name="price" value="<?=$price?>">
+                <div class="input-group-append">
+                    <span class="input-group-text">€</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="picture">Image :</label>	
+            <input class="form-control-file" type="file" name="picture" id="picture" accept="image/png,image/jpeg,image/gif">
+            <?php if(!is_null($originalpicture)):?>
+                <img src="<?= $wwwUrl ?>/uploads/products/<?=$originalpicture?>"/>
+            <?php else:?>
+                <img src="https://via.placeholder.com/100" />
+            <?php endif;?>
+        </div>
+        <div class="form-group">
+            <label for="categoryId">Catégorie</label>
+            <select class="form-control" id="categoryId" name="categoryId">
+                <?php foreach($categories as $categorie):?>
+                    <option value="<?=$categorie['cat_id']?>" <?php if ($categoryId == $categorie['cat_id']):?>selected<?php endif;?>><?=$categorie['cat_name']?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
+
+        <div class="text-center">
+            <a href="<?= $requestUrl ?>/admin/products/" class="btn btn-outline-dark" role="button">Annuler</a>
+            <input type="submit" value="Enregistrer" class="btn btn-outline-success" >
+        </div>
+
+        <input type="hidden" name="originalpicture" value="<?=$originalpicture?>">
+        <input type="hidden" name="id" value="<?=$id?>">
+</form>

@@ -1,22 +1,22 @@
 <?php
 
-class HomeController
+class ProductsController
 {
     public function httpGetMethod(Http $http, array $queryFields)
     {
-    	/*
-    	 * Méthode appelée en cas de requête HTTP GET
-    	 *
-    	 * L'argument $http est un objet permettant de faire des redirections etc.
-    	 * L'argument $queryFields contient l'équivalent de $_GET en PHP natif.
-    	 */
-    	$categoryModel = new CategoriesModel();
-        $categories = $categoryModel->listAll();
-        
+
+		$productModel = new ProductsModel();
+
+		$products = $productModel->listAll();
+
+		$flashbag = new FlashBag();
+
         return [
-            'categories' => $categories
+			'title'=>'Liste des produits',
+			'active'=>'listProduct',
+			'products' => $products,
+			'flashbag'=> $flashbag->fetchMessages()
         ];
-		
     }
 
     public function httpPostMethod(Http $http, array $formFields)
