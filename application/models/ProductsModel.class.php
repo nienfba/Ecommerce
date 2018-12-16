@@ -97,10 +97,8 @@ class ProductsModel
     public function deleteVariation($id)
     {
        /* EN PASSANT PAR LE MODELE
-          $productVariations = new ProductsVariationsModel();
-        $variations = $productVariations->listAll();
-        foreach($variations as $variation)
-            $variation->delete($variation['product_prod_id']); */
+        $productVariations = new ProductsVariationsModel();
+        $variations = $productVariations->deleteFromProduct($id); */
         $this->dbh->executeSQL('DELETE FROM '.$this->table.'variation WHERE product_prod_id=?',[$id]);
     }
 }
