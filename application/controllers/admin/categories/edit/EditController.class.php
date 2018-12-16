@@ -12,7 +12,7 @@ class EditController
     	 */
         $id = $queryFields['id'];
         //Récupération des données dans la vue
-        $categoryModel = new CategoryModel();
+        $categoryModel = new CategoriesModel();
         $categorie = $categoryModel->find($id);
 
         $form = new CategoriesForm();
@@ -33,6 +33,10 @@ class EditController
             /** Récupération de la photo originale */
             if ($http->hasUploadedFile('picture')) {
                 $picture = $http->moveUploadedFile('picture','/uploads/categories'); //On déplace la photo à l'endroit désiré(le chemin est relatif par rapport au dossier www)et on stocke dans la variable photo le nom du fichier
+                /** On supprime l'ancienne image */
+                if($formFields['originalpicture']!=NULL && file_exists(WWW_PATH.'/uploads/categories/'.$formFields['originalpicture'])){
+                    unlink(WWW_PATH.'/uploads/categories/'.$formFields['originalpicture']);
+                }
             } else {
                 $picture = $formFields['originalpicture']; // Le nom de l'image reste le nom qui était là à l'origine
             }

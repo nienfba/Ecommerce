@@ -47,7 +47,7 @@ class AddController
 
             /** Enregistrer les données dans la base de données */
             $productModel = new ProductsModel();
-            $productModel->add($formFields['name'], $formFields['subtitle'],$formFields['description'], $createdDate,$formFields['price'], $picture,$formFields['categoryId']);
+            $productModel->add($formFields['name'], $formFields['subtitle'],$formFields['description'], $createdDate,$formFields['price'],$formFields['tva'], $picture,$formFields['categoryId']);
             
             /** Ajout du flashbag */
             $flashbag = new Flashbag();

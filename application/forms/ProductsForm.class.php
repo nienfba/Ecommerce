@@ -7,6 +7,7 @@ class ProductsForm extends Form
         $this->addFormField('subtitle');
         $this->addFormField('description');
         $this->addFormField('price');
+        $this->addFormField('tva');
         $this->addFormField('id');
         $this->addFormField('categoryId');
         $this->addFormField('originalpicture');
