@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><?=$title?></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<?=$wwwUrl?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+     <!-- FONTAwesome core CSS -->
+    <link href="<?=$wwwUrl?>/vendor/fontawesome-free/css/all.css" rel="stylesheet">
+
+    <!--Datatable -->
+    <link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="<?=$requestUrl?>/admin/">Gestion d'un site de E-Commerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item <?php if($active=='home'){ echo 'active';}?>">
+              <a class="nav-link" href="<?=$requestUrl?>/admin/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle <?php if($active=='listCustomer' || $active=='addCustomer'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/customers/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Clients
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item <?php if($active=='listCustomer'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/customers/">Liste</a>
+                <a class="dropdown-item <?php if($active=='addCustomer'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/customers/add/">Ajouter</a>
+              </div>
+            </li>
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle <?php if($active=='listArticle' || $active=='addArticle'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/products/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Produits
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item <?php if($active=='listArticle'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/products/">Liste</a>
+                <a class="dropdown-item <?php if($active=='addArticle'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/products/add/">Ajouter</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle <?php if($active=='listCategory' || $active=='addCategory'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/categories/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Catégorie
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item <?php if($active=='listCategory'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/categories/">Liste</a>
+                <a class="dropdown-item <?php if($active=='addCategory'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/categories/add/">Ajouter</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle <?php if($active=='listAdmin' || $active=='addAdmin'){ echo 'active';}?>" href="<?=$requestUrl?>/admin/users/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Gestion
+              </a>
+               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" <?php if($active=='listAdmin' || $active=='addAdmin'){ echo 'active';}?> href="<?=$requestUrl?>/admin/users/">Administrateurs</a>
+                <a class="dropdown-item" href="#">Gestion de la TVA</a>
+                <a class="dropdown-item" href="#">Gestion des frais de ports</a>
+                <a class="dropdown-item" href="#">Gestion des modes de paiments</a>
+              </div>
+              </li>
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle <?php if($active=='listCategory' || $active=='addCategory'){ echo 'active';}?>" href="listUser.php" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i>  <?php //$_SESSION['user']['name']?>
+              </a>
+               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="<?=$requestUrl?>/admin/user/edit/?id=<?php //$_SESSION['user']['id']?>">Mes infos</a>
+                <a class="dropdown-item" href="<?=$requestUrl?>/admin/user/logout/">Déconnexion</a>
+              </div>
+              </li>
+          
+          </ul>
+      
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container mb-4">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="mt-5"><?=$title?></h1>
+          <?php 
+          if(isset($flashbag) && $flashbag!=false):
+            foreach($flashbag as $message):?>
+              <div class="alert alert-success"><?=$message?></div>
+          <?php 
+            endforeach;
+          endif;
+          ?>
+            <!-- Affichage du template lié à la vue -->
+            <?php include $this->viewData['template'] ?>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Êtes-vous sûr de vouloir supprimer cet element ?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a id="linkdelete" href="#"><button type="button" class="btn btn-primary">Supprimer</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="<?=$wwwUrl?>/vendor/jquery/jquery.min.js"></script>
+    <script src="<?=$wwwUrl?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    
+    <!-- Data Table -->
+    <script>
+        /** DATATABLE */
+        $(document).ready( function () {
+             $('#tableDonnee').DataTable( {
+                "language": {
+                    "sProcessing":     "Traitement en cours...",
+                    "sSearch":         "Rechercher&nbsp;:",
+                    "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                    "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                    "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix":    "",
+                    "sLoadingRecords": "Chargement en cours...",
+                    "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                    "oPaginate": {
+                        "sFirst":      "Premier",
+                        "sPrevious":   "Pr&eacute;c&eacute;dent",
+                        "sNext":       "Suivant",
+                        "sLast":       "Dernier"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                    },
+                    "select": {
+                            "rows": {
+                                _: "%d lignes séléctionnées",
+                                0: "Aucune ligne séléctionnée",
+                                1: "1 ligne séléctionnée"
+                            } 
+                    }
+                }
+            } );
+
+            
+        });
+
+         /** BOUTON DELETE ET MODAL */
+        $('#delete').on('show.bs.modal', function (e) {
+          $('#linkdelete').attr("href", e.relatedTarget.href);
+        });
+
+        /** TINYMCE SUR TOUS LES TEXTAREA */
+        tinymce.init({
+        selector: 'textarea',
+        height: 500,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor textcolor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table contextmenu paste code help wordcount'
+        ],
+        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        content_css: [
+            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+            '//www.tinymce.com/css/codepen.min.css']
+        });
+    </script>
+
+  </body>
+
+</html>

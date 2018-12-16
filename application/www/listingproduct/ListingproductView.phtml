@@ -1,0 +1,35 @@
+<main class="container">
+<?php foreach($categories as $categorie):?>
+    <section class="tea">
+        <img src="<?= $wwwUrl ?>/uploads/category/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
+        <h2><span><?=$categorie['cat_name']?></span></h2>
+        <p class="clear"><?=$categorie['cat_description']?></p>
+        <section class="listing-product">
+            <article>
+                <h3>Blue of london</h3>
+                <img src="<?= $wwwUrl ?>/images/product/product3_big.jpg" alt="Photo du thé" />
+                <section class="price">
+                    <p>À partir de <strong>9,00€</strong></p>
+                </section>
+                <a class="btn" href="<?= $requestUrl ?>/product">Voir ce produit</a>
+            </article>
+            <article>
+                <h3>Thé des lords</h3>
+                <img src="<?= $wwwUrl ?>/images/product/product6_big.jpg" alt="Photo du thé" />
+                <section class="price">
+                    <p>À partir de <strong>8,20€</strong></p>
+                </section>
+                <a class="btn" href="#">Voir ce produit</a>
+            </article>
+            <article>
+                <h3>Thé des vahinés</h3>
+                <img src="<?= $wwwUrl ?>/images/product/product7_big.jpg" alt="Photo du thé" />
+                <section class="price">
+                    <p>À partir de <strong>9,40€</strong></p>
+                </section>
+                <a class="btn" href="#">Voir ce produit</a>
+            </article>
+        </section>
+    </section>
+<?php endforeach;?>
+</main>

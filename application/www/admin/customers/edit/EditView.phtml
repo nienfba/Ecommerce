@@ -1,0 +1,66 @@
+<!-- Formulaire de saisie d'un nouvel article -->
+<?php if ($errorMessage != ''):?>
+    <div class="alert alert-danger"><?=$errorMessage?></div>
+<?php endif; ?>
+<form action="<?= $requestUrl ?>/admin/customers/edit/" method="post" enctype="multipart/form-data">
+
+       <div class="form-group row">
+            <label for="firstname">Prénom :</label>
+            <input class="form-control" type="text" id="firstname" name="firstname" value="<?=$firstname?>">
+        </div>
+         <div class="form-group row">
+            <label for="lastname">Nom :</label>
+            <input class="form-control" type="text" id="lastname" name="lastname" value="<?=$lastname?>">
+        </div>
+        <div class="form-group row">
+            <label for="email">Email :</label>
+            <input class="form-control" type="text" id="email" name="email" value="<?=$email?>">
+        </div>
+        <div class="form-group  row">
+            <label for="password" class="col-sm-2 col-form-label">Mot de passe :</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="password" value="" name="password" id="password">
+                <small id="passwordHelp" class="form-text text-muted">Laissez vide pour ne pas modifier.</small>
+            </div>
+            
+             <label for="passwordVerify" class="col-sm-2 col-form-label">Confirmez :</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="password" value="" name="passwordVerify" id="passwordVerify">
+            </div>
+            
+        </div>
+        <div class="form-group row">
+            <label for="address">Adresse :</label>
+            <input class="form-control" type="text" id="address" name="address" value="<?=$address?>">
+        </div>
+          <div class="form-group  row">
+            <label for="cp" class="col-sm-2 col-form-label">Code postal :</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text" name="cp" id="cp" value="<?=$cp?>">
+            </div>
+            
+            <label for="city" class="col-sm-2 col-form-label">Ville :</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text" name="city" id="city" value="<?=$city?>">
+            </div>
+            <label for="country" class="col-sm-2 col-form-label">Pays :</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text" name="country" id="country" value="<?=$country?>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="phone" class="col-sm-2 col-form-label">Téléphone :</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="tel" id="phone" name="phone" value="<?=$phone?>">
+            </div>
+            <label for="birthdate" class="col-sm-2 col-form-label">Date de naissance :</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" id="birthdate" name="birthdate" value="<?=$birthdate?>">
+            </div>
+        </div>
+        <div class="text-center">
+             <input type="submit" value="Enregistrer" class="btn btn-outline-success" >
+        </div>
+
+        <input type="hidden" name="id" value="<?=$id?>">
+</form>

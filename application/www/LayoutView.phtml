@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Module 12 - Cup of Tea</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- CSS Vendor -->
+		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/font-awesome.min.css">
+		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/flexslider.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<!-- CSS Perso -->
+		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/normalize.css">
+		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/base.css">
+		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/style.css">
+		<!-- Perso JS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="<?= $wwwUrl ?>/js/jquery.flexslider-min.js"></script>
+		<script>
+			$(window).on('load', function() {
+				$('.flexslider').flexslider({
+					directionNav: true,
+					controlNav: true
+				});
+			});
+		</script>
+</head>
+<body>
+
+<!-- En-tête commune -->
+    <header>
+        <img class="ribbon" src="<?= $wwwUrl ?>/images/ribbon.svg" alt="élu meilleur thé en 2016" />
+        <section id="topbar">Livraison offerte à partir de 65€ d'achat !</section>
+        <div class="container">
+            <section id="logo">
+            <a href="<?= $requestUrl ?>">
+                <img src="<?= $wwwUrl ?>/images/logo.png" alt="Logo de Cup of Tea" />
+            </a>
+            <section id="cart">
+                <span>Mon panier</span>
+                <strong>42,00€</strong>
+            </section>
+        </section>
+            <nav>
+                <a href="<?= $requestUrl ?>/listingproduct">Thés</a>
+                <a href="#">Grands crus</a>
+                <a href="#">Accessoires</a>
+                <a href="#">Epicerie</a>
+                <a href="<?= $requestUrl ?>/about">Notre histoire</a>
+            </nav>
+        </div>
+    </header>
+
+<main>
+    <!-- Affichage du template lié à la vue -->
+    <?php include $this->viewData['template'] ?>
+</main>
+
+<!-- Pied de page commun -->
+<footer>
+    <section id="info">
+        <article>
+            <i class="fa fa-lock"></i>
+            <small>Paiement sécurisé</small>
+        </article>
+        <article>
+            <i class="fa fa-truck"></i>
+            <small>Ma livraison offerte</small>
+        </article>
+        <article>
+            <i class="fa fa-money"></i>
+            <small>Carte de fidélité</small>
+        </article>
+        <article>
+            <i class="fa fa-phone"></i>
+            <small>Service client</small>
+        </article>
+        <article>
+            <i class="fa fa-check-circle"></i>
+            <small>Garantie qualité</small>
+        </article>
+    </section>
+    <section id="bottombar">
+        <article>
+            <h2>Découvrir Cup of Tea</h2>
+            <ul>
+                <li>Notre histoire</li>
+                <li>Nos boutiques</li>
+                <li>Le Thé de A à Z</li>
+                <li>Espace clients professionnels</li>
+                <li>Recrutement</li>
+                <li>Contactez-nous !</li>
+                <li>L'École du Thé</li>
+            </ul>
+        </article>
+        <article>
+            <h2>Commandez en ligne</h2>
+            <ul>
+                <li>Première visite</li>
+                <li>Aide - FAQ</li>
+                <li>Service client</li>
+                <li>Suivre ma commande</li>
+                <li>Conditions générales de vente</li>
+                <li>Informations légales</li>
+            </ul>
+        </article>
+        <article>
+            <h2>Suivez-nous !</h2>
+            <ul>
+                <li>Notre histoire</li>
+                <li>Nos boutiques</li>
+                <li>Le Thé de A à Z</li>
+                <li>Espace clients professionnels</li>
+            </ul>
+        </article>
+    </section>
+    <small id="licence">
+            <a rel="license" href="https://3wa.fr/propriete-materiel-pedagogique/"><img alt="Propriété de la 3W Academy" style="border-width:0" src="https://3wa.fr/wp-content/themes/3wa2015/img/logos/big.png" /></a><br /><span>Cet exercice</span> de <a href="https://3wa.fr">3W Academy</a> est mis à disposition <a rel="license" href="https://3wa.fr/propriete-materiel-pedagogique/">pour l'usage personnel des étudiants, Pas de Rediffusion - Attribution - Pas d'Utilisation Commerciale - Pas de Modification - International</a>.<br />Les autorisations au-delà du champ de cette licence peuvent être obtenues auprès de <a href="mailto:contact@3wa.fr" rel="cc:morePermissions">contact@3wa.fr</a>. Les maquettes ont été réalisées par <a href="http://www.justine-muller.fr">Justine Muller</a>.
+    </small>
+</footer>
+
+<!-- Code principal JavaScript de l'application -->
+<script src="<?= $wwwUrl ?>/js/main.js"></script>
+
+</body>
+</html>

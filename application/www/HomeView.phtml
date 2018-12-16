@@ -1,0 +1,59 @@
+<!-- Message de notification -->
+
+<!-- Code HTML à écrire -->
+<main class="container">
+    <section id="noel">
+        <h1>C'est noël chez Cup of Tea, profitez-en !</h1>
+        <img src="<?= $wwwUrl ?>/images/offre-noel.jpg" alt="Offre spéciale pour noel ! Dès 45€ d'achat, le photophore de noël vous sera offert. Et dès 85€ un thé vert au prune et coing de 100 gramme vous sera offert" />
+        <small>Pour toute commande effectuée avant le 20 décembre</small>
+    </section>
+    <section id="slider">
+        <div class="flexslider">
+            <ul class="slides">
+                <li><img src="<?= $wwwUrl ?>/images/slider/1.jpg" alt="Retrouvez toute nos idées cadeaux pour les fêtes de noël" /></li>
+                <li><img src="<?= $wwwUrl ?>/images/slider/2.jpg" alt="Retrouvez toute la collection des thés numéro 25 et notre nouvelle édition limitée" /></li>
+            </ul>
+        </div>
+    </section>
+    <section id="categorie">
+        <h2><span>Choisissez votre thé</span></h2>
+        <?php foreach($categories as $categorie):?>
+            <a href="#">
+                <img src="<?= $wwwUrl ?>/uploads/category/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
+                <h3><?=$categorie['cat_name']?></h3>
+            </a>
+        <?php endforeach;?>
+    </section>
+    <section id="tea">
+        <article id="new">
+            <h2><span>Notre nouveauté</span></h2>
+            <img src="<?= $wwwUrl ?>/images/product/product1.jpg" alt="Thé du Hammam" />
+            <h3>Thé du hammam</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <section class="price">
+                <p>À partir de <strong>8,50€</strong></p>
+            </section>
+            <a class="btn" href="#">Voir ce produit</a>
+        </article>
+        <article id="best">
+            <h2><span>Notre best-seller</span></h2>
+            <img src="<?= $wwwUrl ?>/images/product/product2.jpg" alt="Infustion Herboriste" />
+            <h3>Infusion Herboriste</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <section class="price">
+                <p>À partir de <strong>7,60€</strong></p>
+            </section>
+            <a class="btn" href="#">Voir ce produit</a>
+        </article>
+        <article id="crush">
+            <h2><span>Notre coup de coeur</span></h2>
+            <img src="<?= $wwwUrl ?>/images/product/product3.jpg" alt="Blue of London" />
+            <h3>Blue of London</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <section class="price">
+                <p>À partir de <strong>9,00€</strong></p>
+            </section>
+            <a class="btn" href="<?= $requestUrl ?>/product">Voir ce produit</a>
+        </article>
+    </section>
+</main>

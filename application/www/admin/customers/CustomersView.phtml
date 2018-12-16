@@ -1,0 +1,27 @@
+<section class="table-responsive">
+<p>
+<a class="btn btn-primary" role="button" href="<?= $requestUrl ?>/admin/customers/add/"><i class="fas fa-plus-square"></i> Ajouter un client</a>
+</p>    
+    <table id="tableDonnee" class="table">
+        <thead>
+            <th>Id</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Date d'inscription</th>
+            <th>Modif/Suppr</th>
+        </thead>
+        <tbody>
+            <?php foreach($customers as $customer):?>
+                <tr>
+                    <td><?=$customer['cust_id']?></td>
+                    <td><?=$customer['cust_firstname']?></td>
+                    <td><?=$customer['cust_lastname']?></td>
+                    <td><?=$customer['cust_email']?></td>
+                    <td><?=$customer['cust_createdDate']?></td>
+                    <td><a href="<?= $requestUrl ?>/admin/customers/edit/?id=<?=$customer['cust_id']?>"><i class="fas fa-edit"></i></a> <a href="<?= $requestUrl ?>/admin/customers/del/?id=<?=$customer['cust_id']?>"  data-toggle="modal" data-target="#delete"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</section>

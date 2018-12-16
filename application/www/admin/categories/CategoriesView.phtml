@@ -1,0 +1,30 @@
+<section class="table-responsive">
+<p>
+<a class="btn btn-primary" role="button" href="<?= $requestUrl ?>/admin/categories/add/"><i class="fas fa-plus-square"></i> Ajouter une catégorie</a>
+</p>    
+    <table id="tableDonnee" class="table">
+        <thead>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Modif/Suppr</th>
+        </thead>
+        <tbody>
+            <?php foreach($categories as $categorie):?>
+                <tr>
+                    <td><?=$categorie['cat_id']?></td>
+                    <td><?=$categorie['cat_name']?></td>
+                    <td><?=$categorie['cat_description']?></td>
+                    <td><?php if(!is_null($categorie['cat_picture'])):?>
+                            <img src="<?= $wwwUrl ?>/uploads/category/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
+                        <?php else:?>
+                            <img src="https://via.placeholder.com/100" />
+                        <?php endif;?>
+                    </td>
+                    <td><a href="<?= $requestUrl ?>/admin/categories/edit/?id=<?=$categorie['cat_id']?>"><i class="fas fa-edit"></i></a> <a href="<?= $requestUrl ?>/admin/categories/del/?id=<?=$categorie['cat_id']?>"  data-toggle="modal" data-target="#delete"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</section>

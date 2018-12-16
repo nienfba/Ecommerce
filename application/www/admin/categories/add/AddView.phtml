@@ -1,0 +1,24 @@
+<!-- Page d'ajout d'une catégorie -->
+<!-- Formulaire de saisie d'un nouvel article -->
+<?php if ($errorMessage != ''):?>
+    <div class="alert alert-danger"><?=$errorMessage?></div>
+<?php endif; ?>
+<form action="<?= $requestUrl ?>/admin/categories/add/" method="post" enctype="multipart/form-data">
+      
+        <div class="form-group row">
+            <label for="name">Nom :</label>
+            <input class="form-control" type="text" id="name" name="name" value="<?=$name?>">
+        </div>
+        <div class="form-group row">
+            <label for="contents">Description :</label>
+            <textarea class="form-control" id="contents" name="contents" rows="15"><?=$contents?></textarea>
+        </div>
+        <div class="form-group row">
+            <label for="picture">Image :</label>	
+            <input class="form-control-file" type="file" name="picture" id="picture" accept="image/png,image/jpeg,image/gif">
+        </div>
+        <div class="text-center">
+             <input type="submit" value="Enregistrer" class="btn btn-outline-success" >
+        </div>
+    </fieldset>
+</form>
