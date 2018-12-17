@@ -28,13 +28,9 @@
                             <option value="<?=$variation['prodv_id']?>" data-price="<?=$variation['priceTTC']?>"><?=$variation['prodv_name'].' ('.$variation['priceTTC'].' €)'?></option>
                         <?php endforeach;?>
                     </select>
-                    <h3>
-                        <?php foreach($variations as $index=>$variation):?>
-                            <span id="variation<?=$variation['prodv_id']?>"><?=$variation['priceTTC'];?> €</span>
-                        <?php endforeach;?>
-                    </h3>
+                    <h3 id="price"><span><?=$variations[0]['priceTTC'];?></span> €</h3>
                 <?php else:?>
-                    <h3><?=$product['priceTTC'];?> €</h3>
+                    <h3 id="price"><span><?=$product['priceTTC'];?></span> €</h3>
                 <?php endif?>
                 <p><label for="quantity">Quantité :</label> <input type="number" id="quantity" name="quantity" value="1" min="1" max="20" /></p>
                 <a class="btn" href="#">Ajouter au panier</a>
@@ -50,14 +46,8 @@
 <script>
 /** Un petit coup de JS pour changer le prix en fonction de la variation */
 $(function(){
-    $('h3 span').each(function() {
-        if(this.id != 'variation'+$('#variation').val())
-            $(this).toggle();
-    });
-
     $('#variation').on('change',function(){
-        $('h3 span').hide();
-        $('#variation'+$(this).val()).show();
+        $('#price span').text($(this).find(':selected').data('price'));
     });
 });
 </script>
