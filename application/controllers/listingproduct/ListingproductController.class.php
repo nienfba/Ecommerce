@@ -11,6 +11,7 @@ class ListingproductController
 		/** Pour chaque catégorie on va chercher les produis associés et on rajoute un index 'products[cat_id]'=> {liste produit} 
 		 * Cette solution est bien prise de tête  mais on respecte ici la place du contrôleur
 		 * On aurait pu faire un accès au modèle et un calcul du prix dans la vue... voir commentaire dans la vue !
+		 * De mon côté je préfère bien séparer les tâches, le controleur garde le controle sur les données
 		*/
 		$productModel = new ProductsModel();
 		$products = array();

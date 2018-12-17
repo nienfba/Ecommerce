@@ -25,8 +25,7 @@ class AddController
             /** On vérifie que tous les champs sont remplis */
             foreach($formFields as $formField)
             {
-
-                if (empty($formField))
+                if ($formField == '')
                     throw new DomainException('Merci de remplir tous les champs !');
             }
             /** Password et passwordverify */
