@@ -2,8 +2,8 @@
     <section id="product">
         <section id="product-detail">
             <div id="product-name">
-                <h1>Blue of London</h1>
-                <h2>Thé noir à la bergamote</h2>
+                <h1><?=$product['prod_name']?></h1>
+                <h2><?=$product['prod_subtitle']?></h2>
                 <p>Ref : 133742</p>
             </div>
             <div id="rating">
@@ -16,23 +16,29 @@
             </div>
         </section>
         <section id="product-quantity">
-            <img src="<?= $wwwUrl ?>/images/product/product3_big.jpg" alt="" />
+            <?php if(!is_null($product['prod_picture'])):?>
+                <img src="<?= $wwwUrl ?>/uploads/products/<?=$product['prod_picture']?>" alt="<?=$product['prod_name']?>" />
+            <?php else:?>
+                <img src="https://via.placeholder.com/300" />
+            <?php endif;?>
             <div class="price">
-                <select name="quantity">
-                    <option>Pochette de 100gr</option>
-                    <option>Pochette de 500gr</option>
-                    <option>Pochette de 1kg</option>
-                </select>
-                <h3>9,00€</h3>
+                <?php if($variations):?>
+                    <select name="variation">
+                        <?php foreach($variations as $variation):?>
+                            <option value="<?=$variation['prodv_id']?>" data-price="<?=$variation['priceTTC']?>"><?=$variation['prodv_name'].' ('.$variation['priceTTC'].' €)'?></option>
+                        <?php endforeach;?>
+                    </select>
+                    <h3><?=$variations[0]['priceTTC'];?> €</h3>
+                <?php else:?>
+                    <h3><?=$product['priceTTC'];?> €</h3>
+                <?php endif?>
+                <p><label for="quantity">Quantité :</label> <input type="number" id="quantity" name="quantity" value="1" min="1" max="20" /></p>
                 <a class="btn" href="#">Ajouter au panier</a>
                 <a id="wishlist" href="#">Ajouter à ma liste d'envie</a>
             </div>
         </section>
         <section id="product-description">
-            <p>Blue of London est un Earl Grey d'exception qui associe un des meilleurs thés noirs au monde, le Yunnan, et une bergamote fraîche et délicate. Un mélange remarquable d'équilibre et de finesse.</p>
-            <p>Le Earl Grey est un grand classique anglais, depuis que Charles Grey, comte (earl en anglais) de Falodon et Ministre des Affaires étrangères du Royaume britannique au milieu du XIX ème siècle, reçut d'un mandarin chinois une vieille recette consistant à aromatiser son thé avec de la bergamote.</p>
-            <p><strong>Profitez d'une remise de 5% sur la pochette de 500g (prix déjà remisé).</strong></p>
-            <p><strong>Profitez d'une remise de 10% sur le lot de 2 pochettes de 500g (prix déjà remisé).</strong></p>
+            <?=$product['prod_description']?>
         </section>
     </section>
 </main>

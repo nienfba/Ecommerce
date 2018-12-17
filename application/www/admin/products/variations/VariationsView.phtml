@@ -8,8 +8,8 @@
         <thead>
             <th>Id</th>
             <th>Nom</th>
-            <th>Variation du prix € HT</th>
-            <th>Quantité en stock</th>
+            <th class="text-right">Variation du prix € HT</th>
+            <th class="text-right">Quantité en stock</th>
             <th></th>
         </thead>
         <tbody>
@@ -17,8 +17,8 @@
                 <tr>
                     <td><?=$variation['prodv_id']?></td>
                     <td><?=$variation['prodv_name']?></td>
-                    <td><?=$variation['prodv_price']?> € HT</td>
-                    <td><?=$variation['prodv_quantity']?></td>
+                    <td class="text-right"><?php if ($variation['prodv_price'] >= 0){ echo '+';}?><?=$variation['prodv_price']?> € HT <span class="badge badge-primary"><?=$variation['prodv_price'] + $product['prod_price']?> € HT </span></td>
+                    <td class="text-right"><?=$variation['prodv_quantity']?></td>
                     <td><a href="<?= $requestUrl ?>/admin/products/variations/edit/?productid=<?=$variation['product_prod_id']?>&id=<?=$variation['prodv_id']?>"><i class="fas fa-edit"></i></a> <a href="<?= $requestUrl ?>/admin/products/variations/del/?productid=<?=$variation['product_prod_id']?>&id=<?=$variation['prodv_id']?>"  data-toggle="modal" data-target="#delete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             <?php endforeach;?>

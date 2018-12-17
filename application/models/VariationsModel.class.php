@@ -55,6 +55,16 @@ class VariationsModel
         return $this->dbh->queryOne('SELECT * FROM '.$this->table.' WHERE prodv_id = ?',[$id]);
     }
 
+    /** Trouve des variations avec id d'un produit
+     *
+     * @param integer $id identifiant variation 
+     * @return Array Jeu d'enregistrement comportant les produits
+     */
+    public function findByProduct($productId)
+    {
+        return $this->dbh->query('SELECT * FROM '.$this->table.' WHERE product_prod_id = ?',[$productId]);
+    }
+
    
     /** Modifie une variation en base
      *
@@ -85,7 +95,7 @@ class VariationsModel
      * @param integer $productId identifiant d'un produit
      * @return void
      */
-    public function deleteFromProduct($productId)
+    public function deleteByProduct($productId)
     {
         $this->dbh->executeSQL('DELETE FROM '.$this->table.' WHERE product_prod_id=?',[$productId]);
     }

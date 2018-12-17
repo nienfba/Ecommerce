@@ -33,6 +33,8 @@ class ProductsModel
         return $this->dbh->query('SELECT * FROM '.$this->table.' INNER JOIN category ON '.$this->table.'.category_cat_id = category.cat_id');
     }
 
+   
+
     /** Ajoute un produit en base
      *
      * @param string $name nom 
@@ -56,6 +58,16 @@ class ProductsModel
     public function find($id)
     {
         return $this->dbh->queryOne('SELECT * FROM '.$this->table.' WHERE prod_id = ?',[$id]);
+    }
+
+     /** Retourne un tableau de tous les produits en base appartenant à une catégorie
+     *
+     * @param interger $categoryId id de la catégorie
+     * @return Array Jeu d'enregistrement représentant tous les produits en base associé à leur catégorie en base
+     */
+    public function findByCategory($categoryId) 
+    {
+        return $this->dbh->query('SELECT * FROM '.$this->table.' WHERE category_cat_id = ?',[$categoryId]);
     }
 
    
@@ -84,7 +96,7 @@ class ProductsModel
     {
         /** On supprime toutes les variations */
         $productVariations = new VariationsModel();
-        $productVariations->deleteFromProduct($id);
+        $productVariations->deleteByProduct($id);
         $this->dbh->executeSQL('DELETE FROM '.$this->table.' WHERE prod_id=?',[$id]);
     }
 }

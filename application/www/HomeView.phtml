@@ -19,7 +19,7 @@
         <h2><span>Choisissez votre thé</span></h2>
         <?php foreach($categories as $categorie):?>
             <a href="#">
-                <img src="<?= $wwwUrl ?>/uploads/category/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
+                <img src="<?= $wwwUrl ?>/uploads/categories/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
                 <h3><?=$categorie['cat_name']?></h3>
             </a>
         <?php endforeach;?>

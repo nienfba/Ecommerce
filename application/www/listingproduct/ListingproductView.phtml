@@ -1,34 +1,35 @@
 <main class="container">
 <?php foreach($categories as $categorie):?>
     <section class="tea">
-        <img src="<?= $wwwUrl ?>/uploads/category/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
+        <img src="<?= $wwwUrl ?>/uploads/categories/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
         <h2><span><?=$categorie['cat_name']?></span></h2>
         <p class="clear"><?=$categorie['cat_description']?></p>
         <section class="listing-product">
-            <article>
-                <h3>Blue of london</h3>
-                <img src="<?= $wwwUrl ?>/images/product/product3_big.jpg" alt="Photo du thé" />
-                <section class="price">
-                    <p>À partir de <strong>9,00€</strong></p>
-                </section>
-                <a class="btn" href="<?= $requestUrl ?>/product">Voir ce produit</a>
-            </article>
-            <article>
-                <h3>Thé des lords</h3>
-                <img src="<?= $wwwUrl ?>/images/product/product6_big.jpg" alt="Photo du thé" />
-                <section class="price">
-                    <p>À partir de <strong>8,20€</strong></p>
-                </section>
-                <a class="btn" href="#">Voir ce produit</a>
-            </article>
-            <article>
-                <h3>Thé des vahinés</h3>
-                <img src="<?= $wwwUrl ?>/images/product/product7_big.jpg" alt="Photo du thé" />
-                <section class="price">
-                    <p>À partir de <strong>9,40€</strong></p>
-                </section>
-                <a class="btn" href="#">Voir ce produit</a>
-            </article>
+         <?php 
+                /** On utilise la capacité de la vue à dialoguer avec le modèle pour récupérer ici les produits associés
+                 *  et éviter les traitement trop lourd dans le contrôleur
+                 */
+                /* $productModel = new ProductsModel();
+                $products = $productModel->findByCategory($categorie['cat_id']); 
+                */
+
+                // Puis boucle foreach >> foreach($products as $product):
+                //On calcul le prix ttc dans la vue !
+         ?>
+            <?php foreach($products[$categorie['cat_id']] as $product):?>
+                <article>
+                    <h3><?=$product['prod_name']?></h3>
+                    <?php if(!is_null($product['prod_picture'])):?>
+                        <img src="<?= $wwwUrl ?>/uploads/products/<?=$product['prod_picture']?>" alt="<?=$product['prod_name']?>" />
+                    <?php else:?>
+                        <img src="https://via.placeholder.com/300" />
+                    <?php endif;?>
+                    <section class="price">
+                        <p>À partir de <strong><?=$product['priceTTC']?> €</strong></p>
+                    </section>
+                    <a class="btn" href="<?= $requestUrl ?>/product/?productid=<?=$product['prod_id']?>">Voir ce produit</a>
+                </article>
+            <?php endforeach;?>
         </section>
     </section>
 <?php endforeach;?>
