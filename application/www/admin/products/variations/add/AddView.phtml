@@ -1,8 +1,9 @@
-<!-- Formulaire de saisie d'un nouvel article -->
+<!-- Issue #1 Formulaire de saisie d'un nouvel article -->
 <h2><?=$product['prod_name']?> <span class="badge badge-primary"><?=$product['prod_price']?> € HT</span></h2>
 <?php if ($errorMessage != ''):?>
     <div class="alert alert-danger"><?=$errorMessage?></div>
 <?php endif; ?>
+
 <form action="<?= $requestUrl ?>/admin/products/variations/add/" method="post" enctype="multipart/form-data">
 
         <div class="form-group row">
