@@ -94,6 +94,7 @@ header {
 	color: white;
 }
 
+
 #logo {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -110,6 +111,18 @@ header {
 #cart {
 	text-align: right;
 }
+
+#cart a {
+	color: white;
+	display:block;
+	padding:1em;
+}
+
+#cart a:hover {
+	color: white;
+	background: rgba(255,255,255,0.2);
+}
+
 
 #cart strong::before {
 	opacity: 0.6;
@@ -237,6 +250,35 @@ header nav a:hover {
 	font-size: 2.4rem;
 	font-weight: normal;
 }
+
+/* Affichage panier */
+#cartTable
+{
+	border-collapse: collapse;
+	border:none;
+	width:100%;
+}
+#cartTable th, #cartTable td
+{
+	border:none;
+	padding:1em;
+}
+
+#cartTable tfoot th
+{
+	text-align:right;
+}
+
+#cartTable thead th, #cartTable tfoot th.total
+{
+	text-align:left;
+}
+
+#cartTable tr
+{
+	border-bottom : 1px solid #666;
+}
+
 
 /* Partie Listing Product */
 .tea {

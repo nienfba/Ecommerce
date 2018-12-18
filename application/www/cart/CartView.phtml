@@ -1,0 +1,33 @@
+<main class="container">
+    <section class="cartDisplay">
+        <h1>Votre panier</h1>
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>Produit(s)</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Prix total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th colspan="3">Total de votre panier</th>
+                    <th colspan="2" class='total'>0</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            </tbody>
+        </table>
+    </section>
+</main>
+ <div id="confirm">
+    <div><a href="#" class="close"><i class="fas fa-times fa-3x"></i></a></div>
+    <h2>Voulez vous supprimer cet élément ?</h2>
+    <p><a href="#" class="button close"><i class="fas fa-times"></i> Non</a><a href="#" class="button valid"><i class="fas fa-check"></i> Oui</a></p>
+</div>
+
+<script>
+    displayCart();
+</script>
