@@ -26,36 +26,12 @@ $(function () {
         $('#price span').text($(this).find(':selected').data('price'));
     });
 
-
-
-
-    /*   //on sÃ©lectionne tous les boutons delete
-      var boutonsDelete = document.querySelectorAll('.delete');
-  
-      //Box de confirmation
-      var confirm = document.getElementById('confirm');
-  
-      //Les 2 boutons close de la fenÃªtre
-      var close = document.querySelectorAll('.close');
-  
-      //Le bouton valide
-      var valide = document.querySelector('.valid');
-  
-      //Tous les delete affichent la fenÃªtre
-      boutonsDelete.forEach(function (boutonDelete) {
-          boutonDelete.addEventListener('click', function (e) {
-              e.preventDefault();
-              valide.href = this.href;
-              confirm.classList.toggle('open');
-          });
-      });
-  
-      //Tous les boutons close ferment la fenÃªtre
-      close.forEach((boutonClose) => {
-          boutonClose.addEventListener('click', () => {
-              confirm.classList.toggle('open');
-          });
-      }); */
+    /** Validation du panier - Submit form to send json cart
+     * ******************************************
+    */
+    $("#formCart").submit(function () {
+        $('#cartInput').val(JSON.stringify(cart.items));
+    });
 
 });
 

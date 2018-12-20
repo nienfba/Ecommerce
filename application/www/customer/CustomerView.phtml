@@ -2,7 +2,10 @@
     <section id="customerRegister">
         <article>
             <h2>Déjà client</h2>
-            <form action="<?= $requestUrl ?>/customer/login" method="post">
+            <?php if ($errorMessage):?>
+                <div class="error"><?=$errorMessage?></div>
+            <?php endif;?>
+            <form action="<?= $requestUrl ?>/customer/" method="post">
                 <div>
                     <label for="email">Email :</label>
                     <input type="email" id="email" name="email" value="<?=$email?>">

@@ -62,8 +62,18 @@ class CustomersModel
         return $this->dbh->queryOne('SELECT * FROM '.$this->table.' WHERE cust_id = ?',[$id]);
     }
 
+    /** Trouve un client avec son Email
+     *
+     * @param string $email email du client
+     * @return Array Jeu d'enregistrement comportant le client trouvé
+     */
+    public function findByEmail($email)
+    {
+        return $this->dbh->queryOne('SELECT * FROM '.$this->table.' WHERE cust_email = ?',[$email]);
+    }
+
    
-    /** Modifie une catégorie en base
+    /** Modifie un client en base
      *
      * @param integer $id identifiant du client
      * @param string $firstname prenom

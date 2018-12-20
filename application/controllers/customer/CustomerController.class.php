@@ -4,10 +4,6 @@ class CustomerController
 {
      public function httpGetMethod(Http $http, array $queryFields)
     {
-        /** En méthode GET on passe les variables nécessaire à la vue pour éviter les erreurs NOTICE variable undefined
-         * Donc title, active (pour la page active dans le menu) et le formulaire pour que le framework 
-         * nous fournisse les variables du formulaie dans la vue
-         */
         return [
             '_form' => new CustomersForm()
         ];
@@ -20,27 +16,31 @@ class CustomerController
         {
             $customerModel = new CustomersModel();
 
-            /** On vérifie que tous les champs sont remplis */
-            foreach($formFields as $formField)
-            {
-                if ($formField == '')
-                    throw new DomainException('Merci de remplir tous les champs !');
-            }
-            /** Password et passwordverify */
-            if($formFields['password'] != $formFields['passwordVerify'])
-                 throw new DomainException('Erreur de confirmation de mot de passe !');
+            /** On vérifie que email et password fournis */
+            if($formFields['email'] == '' || $formFields['password']=='')
+                throw new DomainException('Merci de remplir tous les champs !');
 
-            /** On hash le mot de passe */
-            $password = password_hash($formFields['password'],PASSWORD_BCRYPT);
-
-            /** Date de création du client */
-            $createdDate = date('Y-m-d H:i:s');
 
             /** Ajout des données dans la BDD grâce au modèle */
-            $customerModel->add($formFields['firstname'], $formFields['lastname'], $formFields['email'], $password,  $formFields['address'], $formFields['cp'], $formFields['city'], $formFields['country'], $formFields['phone'], $createdDate, $formFields['birthdate']);
+            $customer = $customerModel->findByEmail($formFields['email']);
+
+            if(!$customer || !password_verify($formFields['password'],$customer['cust_password']))
+                throw new DomainException('Email ou mot de passe incorrects !');
+
+            /** On logue le client */
+             // Construction de la session utilisateur.
+            $userSession = new UserSession();
+            $userSession->create
+            (
+                $customer['cust_id'],
+                $customer['cust_firstname'],
+                $customer['cust_lastname'],
+                $customer['cust_email']
+            );
+
             /** Falshbag */
             $flashbag = new Flashbag();
-            $flashbag->add('Le client a bien été ajoutée');
+            $flashbag->add('Vous êtes maintenant connecté !');
 
             /** Redirection vers la liste des clients */
             $http->redirectTo('cart/');

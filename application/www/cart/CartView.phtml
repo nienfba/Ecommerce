@@ -1,6 +1,14 @@
 <main class="container">
     <section class="cartDisplay">
         <h1>Votre panier</h1>
+         <?php 
+          if(isset($flashbag) && $flashbag!=false):
+            foreach($flashbag as $message):?>
+              <div class="alert alert-success"><?=$message?></div>
+          <?php 
+            endforeach;
+          endif;
+        ?>
         <table id="cartTable">
             <thead>
                 <tr>
@@ -22,9 +30,9 @@
         </table>
          <a href="<?=$requestUrl?>/product/liste" class="btn">Continuez mes achats</a>
         <?php if ($userSession->isAuthenticated()):?>
-            <form action="<?=$requestUrl?>/order">
-                <input type="hidden" value="" name="cart">
-                <input type="submit" class="btn" value="Finalisez la commande">
+            <form id="formCart" action="<?=$requestUrl?>/order/" method="POST">
+                <input type="hidden" value="" id="cartInput" name="cartInput">
+                <input type="submit" id="cartSubmit" class="btn" value="Voir la commande et payer !">
             </form>
         <?php else:?>
             <a href="<?=$requestUrl?>/customer" class="btn">Finalisez la commande</a>

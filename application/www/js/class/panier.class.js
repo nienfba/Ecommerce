@@ -17,7 +17,7 @@ let Panier = function () {
     /** 
     * @var DOMObject Zone entête de mise à jour du panier prixTotal
     * */
-    this.priceHtml = $('#cart strong i');
+    this.priceHtml = $('#cart strong');
 
     /** 
      * @var DOMObject Tableau pour l'affichage du panier
@@ -96,6 +96,7 @@ Panier.prototype.add = function (e) {
     let product = new Object();
     product.name = buttonAdd.data('name');
     product.id = parseInt(buttonAdd.data('id'));
+    product.picture = buttonAdd.data('picture');
 
     /** Si on a des variations sur le produit */
     if ($('#variation').length) {
@@ -205,7 +206,7 @@ Panier.prototype.updateDisplayResume = function () {
         carTotalPrice += product.totalPrice;
     });
     this.quantityHtml.text(this.items.length);
-    this.priceHtml.text(carTotalPrice);
+    this.priceHtml.text(formatMoneyAmount(carTotalPrice));
 }
 
 /** Mise à jour de la quantité
@@ -248,6 +249,7 @@ Panier.prototype.displayCart = function () {
         if (this.items.length > 0) {
             this.items.forEach((product, index) => {
                 this.tableHtml.append($('<tr>').append(
+                    $('<td>').html(`<img src="${getWwwUrl()}/uploads/products/${product.picture}" width="100">`),
                     $('<td>').text(`${product.name} - ${product.variation}`),
                     $('<td>').html(`${product.quantity} <button id="qteDown" data-id="${index}">-</button><button id="qteUp" data-id="${index}">+</button>`),
                     $('<td>').text(`${formatMoneyAmount(product.unitPrice)}`),

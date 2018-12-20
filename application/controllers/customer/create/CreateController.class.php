@@ -39,8 +39,20 @@ class CreateController
             /** Ajout des données dans la BDD grâce au modèle */
             $customerModel->add($formFields['firstname'], $formFields['lastname'], $formFields['email'], $password,  $formFields['address'], $formFields['cp'], $formFields['city'], $formFields['country'], $formFields['phone'], $createdDate, $formFields['birthdate']);
             /** Falshbag */
+            /** On logue le client */
+             // Construction de la session utilisateur.
+            $userSession = new UserSession();
+            $userSession->create
+            (
+                $customer['cust_id'],
+                $customer['cust_firstname'],
+                $customer['cust_lastname'],
+                $customer['cust_email']
+            );
+
+            /** Falshbag */
             $flashbag = new Flashbag();
-            $flashbag->add('Le client a bien été ajoutée');
+            $flashbag->add('Vous êtes maintenant connecté !');
 
             /** Redirection vers la liste des clients */
             $http->redirectTo('cart/');

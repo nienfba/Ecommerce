@@ -1,0 +1,44 @@
+<main class="container">
+    <section class="orderDisplay">
+        <h1>Votre commande</h1>
+        <h2><span>Commande n°<?=$order['ord_id'];?></span></h2>
+
+         <table id="orderTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Produit(s)</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Prix total</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th colspan="4">Total de votre commande</th>
+                    <th class='total'><?=number_format($orderTotal,2)?> €</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <?php foreach($orderDetails as $orderDetail):?>
+                    <tr>
+                        <td><?php if(!is_null($orderDetail['prod_picture'])):?>
+                            <img width="100" src="<?= $wwwUrl ?>/uploads/products/<?=$orderDetail['prod_picture']?>" alt="<?=$orderDetail['prod_name']?>" />
+                        <?php else:?>
+                            <img src="https://via.placeholder.com/100" />
+                        <?php endif;?>
+                        </td>
+                        <td><?=$orderDetail['prod_name'];?> <?php if(!is_null($orderDetail['prodv_name'])) echo $orderDetail['prodv_name'];?></td>
+                        <td><?=$orderDetail['ordd_quantity'];?></td>
+                        <td><?=number_format($orderDetail['ordd_price'],2);?> €</td>
+                        <td><?=number_format($orderDetail['ordd_quantity'] * $orderDetail['ordd_price'],2);?> €</td>
+                    </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
+
+        <a class="btn" href="<?=$requestUrl?>/order/payment/?payment=cb">Payer par CB</a>
+        <a class="btn" href="<?=$requestUrl?>/order/payment/?payment=transfert">Payer par Virement</a>
+        <a class="btn" href="<?=$requestUrl?>/order/payment/?payment=check">Payer par Chèque</a>
+    </section>
+</main>

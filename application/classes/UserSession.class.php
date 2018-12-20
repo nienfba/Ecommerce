@@ -24,11 +24,27 @@ class UserSession
         ];
     }
 
+    public function createOrder($orderId)
+    {
+        // Construction de la session utilisateur.
+        $_SESSION['order'] = $orderId;
+    }
+
     public function destroy()
     {
         // Destruction de l'ensemble de la session.
         $_SESSION = array();
         session_destroy();
+    }
+
+    public function getOrderId()
+    {
+        if($this->isAuthenticated() == false || !isset($_SESSION['order']))
+        {
+            return null;
+        }
+
+        return $_SESSION['order'];
     }
 
     public function getEmail()

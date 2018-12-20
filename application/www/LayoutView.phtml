@@ -5,15 +5,14 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- CSS Vendor -->
-		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/font-awesome.min.css">
+		<link rel="stylesheet" href="<?= $wwwUrl ?>/vendor/fontawesome-free/css/all.min.css">
 		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/flexslider.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 		<!-- CSS Perso -->
 		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/normalize.css">
 		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/base.css">
 		<link rel="stylesheet" href="<?= $wwwUrl ?>/css/style.css">
 		<!-- Perso JS -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="<?= $wwwUrl ?>/vendor/jquery/jquery.min.js"></script>
 		<script src="<?= $wwwUrl ?>/js/jquery.flexslider-min.js"></script>
 		<script>
 			$(window).on('load', function() {
@@ -44,8 +43,11 @@
             <section id="cart">
                 <a href="<?= $requestUrl ?>/cart/">
                     <span>Mon panier (<i>0</i>)</span>
-                    <strong><i>0</i>€</strong>
+                    <strong>0</strong>
                 </a>
+                <?php if ($userSession->isAuthenticated()):?>
+                   <p>Bienvenue <?=$userSession->getFullName()?> <a id="logout" href="<?= $requestUrl ?>/customer/logout/"><i class="fas fa-sign-out-alt"></i></a></p>
+                <?php endif;?>
             </section>
         </section>
             <nav>
@@ -67,23 +69,23 @@
 <footer>
     <section id="info">
         <article>
-            <i class="fa fa-lock"></i>
+            <i class="fas fa-lock"></i>
             <small>Paiement sécurisé</small>
         </article>
         <article>
-            <i class="fa fa-truck"></i>
+            <i class="fas fa-truck"></i>
             <small>Ma livraison offerte</small>
         </article>
         <article>
-            <i class="fa fa-money"></i>
+            <i class="fas fa-money"></i>
             <small>Carte de fidélité</small>
         </article>
         <article>
-            <i class="fa fa-phone"></i>
+            <i class="fas fa-phone"></i>
             <small>Service client</small>
         </article>
         <article>
-            <i class="fa fa-check-circle"></i>
+            <i class="fas fa-check-circle"></i>
             <small>Garantie qualité</small>
         </article>
     </section>

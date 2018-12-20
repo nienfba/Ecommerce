@@ -108,6 +108,7 @@ header {
 	margin-top: 25px;
 }
 
+
 #cart {
 	text-align: right;
 }
@@ -123,11 +124,18 @@ header {
 	background: rgba(255,255,255,0.2);
 }
 
+#cart a#logout
+{
+	display:inline;
+	padding:none;
+}
+
+
 
 #cart strong::before {
 	opacity: 0.6;
 	content: "\F07A";
-	font-family: "FontAwesome";
+	font-family: "Font Awesome 5 Free";
 	font-size: 2rem;
 	padding: 10px;
 	margin: 0 5px;
@@ -252,29 +260,30 @@ header nav a:hover {
 }
 
 /* Affichage panier */
-#cartTable
+#cartTable, #orderTable
 {
 	border-collapse: collapse;
 	border:none;
 	width:100%;
 }
-#cartTable th, #cartTable td
+#cartTable th, #cartTable td, #orderTable td, #orderTable th
 {
 	border:none;
 	padding:1em;
 }
 
-#cartTable tfoot th
+#cartTable tfoot th, #orderTable tfoot th
 {
 	text-align:right;
 }
 
-#cartTable thead th, #cartTable tfoot th.total
+#cartTable thead th, #cartTable tfoot th.total, 
+#orderTable thead th, #orderTable tfoot th.total
 {
 	text-align:left;
 }
 
-#cartTable tr
+#cartTable tr, #orderTable tr
 {
 	border-bottom : 1px solid #666;
 }
@@ -383,7 +392,7 @@ header nav a:hover {
 
 #wishlist::before {
 	content: "\F004";
-	font-family: "FontAwesome";
+	font-family: "Font Awesome 5 Free";
 	margin: 5px;
 	color: #E7877A;
 }

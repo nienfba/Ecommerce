@@ -33,7 +33,7 @@
                     <h3 id="price"><span><?=$product['priceTTC'];?></span> €</h3>
                 <?php endif?>
                 <p><label for="quantity">Quantité :</label> <input type="number" id="quantity" name="quantity" value="1" min="1" max="20" /></p>
-                <a class="btn" href="#" id="addCart" data-id="<?=$product['prod_id']?>" data-name="<?=$product['prod_name']?>" data-price="<?=$product['priceTTC']?>">Ajouter au panier</a>
+                <a class="btn" href="#" id="addCart" data-id="<?=$product['prod_id']?>" data-picture="<?=$product['prod_picture']?>" data-name="<?=$product['prod_name']?>" data-price="<?=$product['priceTTC']?>">Ajouter au panier</a>
                 <a id="wishlist" href="#">Ajouter à ma liste d'envie</a>
             </div>
         </section>
