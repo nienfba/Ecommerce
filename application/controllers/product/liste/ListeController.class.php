@@ -1,6 +1,6 @@
 <?php
 
-class ListingproductController
+class ListeController
 {
     public function httpGetMethod(Http $http, array $queryFields)
     {

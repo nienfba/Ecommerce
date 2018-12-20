@@ -1,6 +1,6 @@
 <?php
 /** Ce contrôleur va permettre à un client de créer son compte ! */
-class CustomersController
+class CustomerController
 {
      public function httpGetMethod(Http $http, array $queryFields)
     {
@@ -9,8 +9,6 @@ class CustomersController
          * nous fournisse les variables du formulaie dans la vue
          */
         return [
-			'title'=>'Ajouter un client',
-            'active'=>'addCustomer',
             '_form' => new CustomersForm()
         ];
     }
@@ -45,7 +43,7 @@ class CustomersController
             $flashbag->add('Le client a bien été ajoutée');
 
             /** Redirection vers la liste des clients */
-            $http->redirectTo('admin/customers/');
+            $http->redirectTo('cart/');
         }
         catch(DomainException $exception)
         {
@@ -61,8 +59,6 @@ class CustomersController
             $form->setErrorMessage($exception->getMessage());
             
             return [ 
-                'title'=>'Ajouter un client',
-			    'active'=>'addCustomer',
                 '_form' => $form 
             ]; 
         }
