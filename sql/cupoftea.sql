@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 17 déc. 2018 à 00:40
+-- Généré le :  jeu. 20 déc. 2018 à 19:32
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `cat_description` text,
   `cat_picture` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `category`
@@ -69,14 +69,14 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `cust_createdDate` datetime DEFAULT NULL,
   `cust_birthday` date DEFAULT NULL,
   PRIMARY KEY (`cust_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `customer`
 --
 
 INSERT INTO `customer` (`cust_id`, `cust_firstname`, `cust_lastname`, `cust_email`, `cust_password`, `cust_address`, `cust_cp`, `cust_city`, `cust_country`, `cust_phone`, `cust_createdDate`, `cust_birthday`) VALUES
-(1, 'Fabien', 'Sellès', 'fabien.selles@alti-com.fr', '$2y$10$WyOWMI./qj6AwuYXulVNa.1BtmFFqQA8bGfr6dgRBuSGNToqs78ri', '59 Rue Carnot', '05000', 'GAP', 'France', '0608371743', '2018-12-16 01:03:52', '2018-12-13');
+(1, 'Fabien', 'Sellès', 'fabien.selles@alti-com.fr', '$2y$10$WyOWMI./qj6AwuYXulVNa.1BtmFFqQA8bGfr6dgRBuSGNToqs78ri', '59 Rue Carnot', '05000', 'GAP', 'France', '0608371743', '2018-12-16 01:03:52', '1999-12-13');
 
 -- --------------------------------------------------------
 
@@ -88,14 +88,25 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `ord_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ord_date` datetime DEFAULT NULL,
-  `ord_status` varchar(45) DEFAULT NULL,
+  `ord_status` int(11) NOT NULL DEFAULT '0',
   `ord_dateShipped` date DEFAULT NULL,
   `ord_dateDelivery` date DEFAULT NULL,
   `ord_comment` text,
   `customer_cust_id` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`ord_id`),
   KEY `fk_order_customer_idx` (`customer_cust_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `order`
+--
+
+INSERT INTO `order` (`ord_id`, `ord_date`, `ord_status`, `ord_dateShipped`, `ord_dateDelivery`, `ord_comment`, `customer_cust_id`) VALUES
+(13, '2018-12-20 06:39:47', 1, NULL, NULL, '', 1),
+(14, '2018-12-20 07:01:52', 3, NULL, NULL, '', 1),
+(15, '2018-12-20 07:02:24', 3, NULL, NULL, '', 1),
+(16, '2018-12-20 07:12:07', 1, NULL, NULL, '', 1),
+(17, '2018-12-20 07:12:51', 3, NULL, NULL, '', 1);
 
 -- --------------------------------------------------------
 
@@ -110,10 +121,24 @@ CREATE TABLE IF NOT EXISTS `orderdetail` (
   `ordd_price` double DEFAULT NULL,
   `order_ord_id` int(10) UNSIGNED NOT NULL,
   `product_prod_id` int(10) UNSIGNED NOT NULL,
+  `productvariation_prodv_id` int(10) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`ordd_id`),
   KEY `fk_orderDetail_order1_idx` (`order_ord_id`),
-  KEY `fk_orderDetail_product1_idx` (`product_prod_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `fk_orderDetail_product1_idx` (`product_prod_id`),
+  KEY `fk_orderdetail_productvariation1_idx` (`productvariation_prodv_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `orderdetail`
+--
+
+INSERT INTO `orderdetail` (`ordd_id`, `ordd_quantity`, `ordd_price`, `order_ord_id`, `product_prod_id`, `productvariation_prodv_id`) VALUES
+(15, 10, 12, 13, 3, 5),
+(16, 1, 18, 14, 1, 1),
+(19, 6, 12, 15, 3, 5),
+(20, 6, 12, 16, 3, 5),
+(31, 9, 18, 17, 1, 1),
+(32, 10, 360, 17, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -134,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `category_cat_id` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`prod_id`),
   KEY `fk_product_category1_idx` (`category_cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `product`
@@ -142,7 +167,10 @@ CREATE TABLE IF NOT EXISTS `product` (
 
 INSERT INTO `product` (`prod_id`, `prod_name`, `prod_subtitle`, `prod_description`, `prod_createdDate`, `prod_price`, `prod_tva`, `prod_picture`, `category_cat_id`) VALUES
 (1, 'Blue of London', 'Thé noir à la bergamote', '<section id=\"product-description\">\r\n<p>Blue of London est un Earl Grey d\'exception qui associe un des meilleurs th&eacute;s noirs au monde, le Yunnan, et une bergamote fra&icirc;che et d&eacute;licate. Un m&eacute;lange remarquable d\'&eacute;quilibre et de finesse.</p>\r\n<p>Le Earl Grey est un grand classique anglais, depuis que Charles Grey, comte (earl en anglais) de Falodon et Ministre des Affaires &eacute;trang&egrave;res du Royaume britannique au milieu du XIX &egrave;me si&egrave;cle, re&ccedil;ut d\'un mandarin chinois une vieille recette consistant &agrave; aromatiser son th&eacute; avec de la bergamote.</p>\r\n<p><strong>Profitez d\'une remise de 5% sur la pochette de 500g (prix d&eacute;j&agrave; remis&eacute;).</strong></p>\r\n<p><strong>Profitez d\'une remise de 10% sur le lot de 2 pochettes de 500g (prix d&eacute;j&agrave; remis&eacute;).</strong></p>\r\n</section>', '2018-12-16', 15, 20, 'product3_big.jpg', 1),
-(3, 'Thé bleu', 'Super thé tout bleu', '<p>Youpi !</p>', '2018-12-16', 10, 20, 'product9_big.jpg', 3);
+(3, 'Thé bleu', 'Super thé tout bleu', '<p>Youpi !</p>', '2018-12-16', 10, 20, 'product9_big.jpg', 3),
+(4, 'Thé rouge du Pérou', 'Le thé qui est rouge', '<p>Le th&eacute; qui est rouge</p>\r\n<p>Le th&eacute; qui est rouge</p>\r\n<p>Le th&eacute; qui est rouge</p>\r\n<p>Le th&eacute; qui est rouge</p>\r\n<p>Le th&eacute; qui est rouge</p>', '2018-12-17', 150, 20, 'product1.jpg', 5),
+(5, 'Thé rouge de Marseille', 'Mélangé à la main par des cagolles', '<p>Toutes les saveurs du SUD !!!</p>', '2018-12-17', 300, 20, 'product13_big.jpg', 5),
+(6, 'Thé rouge de Gap', 'Préparer par des vrais paysans !', '<p>Pr&eacute;parer par des vrais paysans !</p>\r\n<p>Pr&eacute;parer par des vrais paysans !</p>\r\n<p>Pr&eacute;parer par des vrais paysans !</p>\r\n<p>&nbsp;</p>', '2018-12-17', 600, 20, NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -159,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `productvariation` (
   `product_prod_id` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`prodv_id`),
   KEY `fk_productVariation_product1_idx` (`product_prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `productvariation`
@@ -170,7 +198,10 @@ INSERT INTO `productvariation` (`prodv_id`, `prodv_name`, `prodv_price`, `prodv_
 (2, 'Sachet de 200g', 15, 150, 1),
 (4, 'Sachet de 300g', 20, 100, 1),
 (5, 'Sachet de 100g', 0, 300, 3),
-(6, 'Sachet de 50g', -5, 100, 1);
+(6, 'Sachet de 50g', -5, 100, 1),
+(7, 'Sachet de 100g', 0, 20, 4),
+(8, 'Sachet de 200g', 100, 20, 4),
+(9, 'Sachet de 50g', -50, 10, 4);
 
 --
 -- Contraintes pour les tables déchargées
@@ -187,7 +218,8 @@ ALTER TABLE `order`
 --
 ALTER TABLE `orderdetail`
   ADD CONSTRAINT `fk_orderDetail_order1` FOREIGN KEY (`order_ord_id`) REFERENCES `order` (`ord_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_orderDetail_product1` FOREIGN KEY (`product_prod_id`) REFERENCES `product` (`prod_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_orderDetail_product1` FOREIGN KEY (`product_prod_id`) REFERENCES `product` (`prod_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_orderdetail_productvariation1` FOREIGN KEY (`productvariation_prodv_id`) REFERENCES `productvariation` (`prodv_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `product`
