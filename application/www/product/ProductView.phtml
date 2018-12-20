@@ -25,7 +25,7 @@
                 <?php if($variations):?>
                     <select name="variation" id="variation">
                         <?php foreach($variations as $variation):?>
-                            <option value="<?=$variation['prodv_id']?>" data-price="<?=$variation['priceTTC']?>"><?=$variation['prodv_name'].' ('.$variation['priceTTC'].' €)'?></option>
+                            <option value="<?=$variation['prodv_id']?>" data-name="<?=$variation['prodv_name']?>" data-price="<?=$variation['priceTTC']?>"><?=$variation['prodv_name'].' ('.$variation['priceTTC'].' €)'?></option>
                         <?php endforeach;?>
                     </select>
                     <h3 id="price"><span><?=$variations[0]['priceTTC'];?></span> €</h3>

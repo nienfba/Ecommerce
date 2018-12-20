@@ -20,14 +20,21 @@
             <tbody>
             </tbody>
         </table>
+         <a href="<?=$requestUrl?>/product/liste" class="btn">Continuez mes achats</a>
+        <?php if ($userSession->isAuthenticated()):?>
+            <form action="<?=$requestUrl?>/order">
+                <input type="hidden" value="" name="cart">
+                <input type="submit" class="btn" value="Finalisez la commande">
+            </form>
+        <?php else:?>
+            <a href="<?=$requestUrl?>/customer" class="btn">Finalisez la commande</a>
+        <?php endif;?>
     </section>
 </main>
+
+<!--Modal de confirmation-->
  <div id="confirm">
     <div><a href="#" class="close"><i class="fas fa-times fa-3x"></i></a></div>
     <h2>Voulez vous supprimer cet élément ?</h2>
     <p><a href="#" class="button close"><i class="fas fa-times"></i> Non</a><a href="#" class="button valid"><i class="fas fa-check"></i> Oui</a></p>
 </div>
-
-<script>
-    displayCart();
-</script>

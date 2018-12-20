@@ -514,6 +514,65 @@ footer {
 	width: 50px;
 }
 
+
+#confirm
+{
+    position:absolute;
+    background-color: #879e0f;
+    top:-400px;
+    left:30%;
+    width:40%;
+	opacity: 1;
+	border-radius:10px;
+    height:200px;
+    z-index: 99;
+    transition:all .5s ease-in;
+    padding:20px;
+    text-align: center;
+
+}
+
+#confirm h2
+{
+	color:#FFFFFF;
+}
+
+#confirm div
+{
+    text-align: right;
+}
+
+#confirm h2{
+    margin-bottom: 20px;
+}
+
+#confirm.open
+{
+    top:200px;
+}
+
+#confirm a.button
+{
+    display:inline-block;
+    width:30%;
+    padding:5px;
+    margin:5px;
+    background-color:white;
+    font-size:1.3em;
+    color:#879e0f;
+    text-decoration: none;
+}
+
+#confirm a.close
+{
+    color: brown;
+}
+
+#confirm a.valid
+{
+    color: green;
+}
+
 @media screen and (max-width: 1024px) {
 	.ribbon {
 		width: 80px;
@@ -612,5 +671,17 @@ footer {
 		-ms-flex-preferred-size: 50%;
 		    flex-basis: 50%;
 		text-align: center;
+	}
+
+	#confirm
+	{
+		left:5%;
+		width:90%;
+		height:200px;
+	}
+
+	#confirm.open
+	{
+		top:300px;
 	}
 }
