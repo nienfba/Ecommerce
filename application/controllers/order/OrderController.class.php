@@ -33,10 +33,17 @@ class OrderController
         $userSession = new UserSession();
         $idCustomer = $userSession->getUserId();
 
+        if(!isset($queryFields['id']))
+        {
+            /** Flashbag */
+            $flashbag = new Flashbag();
+            $flashbag->add('Une erreur s\'est produite');
+            $http->redirectTo('/cart/');
+        }
+
         $orderId = $queryFields['id'];
         /** On va chercher ici une commande avec son numéro mais aussi le numéro client
          * Comme ça pas de risque de piratage par num de commande 
-         * Dans l'idéal il faudrait aussi vérifier dans findByIdAndCustomer le status de la commande
          */
         $orderModel = new OrderModel();
         $order = $orderModel->findByIdAndCustomer($orderId,$idCustomer);

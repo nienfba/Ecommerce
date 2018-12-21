@@ -43,10 +43,12 @@
             <section id="cart">
                 <a href="<?= $requestUrl ?>/cart/">
                     <span>Mon panier (<i>0</i>)</span>
-                    <strong>0</strong>
+                    <strong></strong>
                 </a>
                 <?php if ($userSession->isAuthenticated()):?>
                    <p>Bienvenue <?=$userSession->getFullName()?> <a id="logout" href="<?= $requestUrl ?>/customer/logout/"><i class="fas fa-sign-out-alt"></i></a></p>
+                <?php else:?>
+                   <p><a id="login" href="<?= $requestUrl ?>/customer/">Connectez vous <i class="fas fa-sign-in-alt"></i></a></p>
                 <?php endif;?>
             </section>
         </section>
@@ -60,7 +62,7 @@
         </div>
     </header>
 
-<main>
+<main class="container">
     <!-- Affichage du template lié à la vue -->
     <?php include $this->viewData['template'] ?>
 </main>
@@ -77,7 +79,7 @@
             <small>Ma livraison offerte</small>
         </article>
         <article>
-            <i class="fas fa-money"></i>
+            <i class="fas fa-money-check"></i>
             <small>Carte de fidélité</small>
         </article>
         <article>

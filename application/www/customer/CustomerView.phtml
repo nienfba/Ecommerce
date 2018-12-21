@@ -1,7 +1,7 @@
-<main class="container">
-    <section id="customerRegister">
+
+    <section id="customerLogin">
         <article>
-            <h2>Déjà client</h2>
+            <h2><span>Déjà client</span></h2>
             <?php if ($errorMessage):?>
                 <div class="error"><?=$errorMessage?></div>
             <?php endif;?>
@@ -18,8 +18,7 @@
             </form>
         </article>
         <article>
-            <h2>Nouveau client</h2>
+            <h2><span>Nouveau client</span></h2>
             <a class="btn" href="<?= $requestUrl ?>/customer/create/">Créer votre compte</a>
         </article>
     </section>
-</main>

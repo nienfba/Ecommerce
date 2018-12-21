@@ -124,10 +124,10 @@ header {
 	background: rgba(255,255,255,0.2);
 }
 
-#cart a#logout
+#cart a#logout, #cart a#login
 {
 	display:inline;
-	padding:none;
+	padding:0;
 }
 
 
@@ -293,7 +293,6 @@ header nav a:hover {
 .tea {
 	background-color: white;
 	padding: 25px;
-	margin: 25px 0;
 }
 
 .tea > img {
@@ -423,6 +422,69 @@ header nav a:hover {
 
 #column p {
 	padding: 10px;
+}
+
+/** Login customer */
+
+#customerLogin
+{
+	display: flex;
+}
+#customerLogin article
+{ 
+	box-sizing: border-box;
+	padding:25px;
+	width:48%;
+	margin: 1%;
+	height:300px;
+	background-color: #FFFFFF;
+	text-align:center;
+}
+
+#customerRegister 
+{
+	background-color: #FFFFFF;
+	padding:25px;
+}
+
+#customerRegister .form-group
+{
+	display:flex;
+   	align-items: center;
+}
+#customerRegister .form-group div
+{
+	box-sizing: border-box;
+	padding:5px;
+	width:50%;
+	margin: auto;
+	height:auto;
+}
+
+form 
+{
+	margin:0px;
+}
+
+form label{
+	display:block;
+}
+
+form input 
+{
+	display:block;
+	box-sizing: border-box;
+	width:100%;
+	padding:10px;
+	border:1px solid #96B011;
+	color:#444444;
+}
+
+form input[type=submit]
+{
+	border:0px;
+	width:50%;
+	cursor: pointer;
 }
 
 /* FOOTER */

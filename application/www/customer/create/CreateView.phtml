@@ -1,28 +1,30 @@
- <main class="container">
     <section id="customerRegister">
+        <h1>Création de votre compte utilisateur</h1>
         <?php if ($errorMessage):?>
             <div class="error"><?=$errorMessage?></div>
         <?php endif;?>
         <form action="<?= $requestUrl ?>/customer/create/" method="post">
-            <div>
-                <label for="firstname">Prénom :</label>
-                <input type="text" id="firstname" name="firstname" value="<?=$firstname?>" required>
+            <div class="form-group">
+                <div>
+                    <label for="firstname">Prénom :</label>
+                    <input type="text" id="firstname" name="firstname" value="<?=$firstname?>" required>
+                </div>
+                <div>
+                    <label for="lastname">Nom :</label>
+                    <input type="text" id="lastname" name="lastname" value="<?=$lastname?>" required>
+                </div>
+                <div>
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" value="<?=$email?>" required>
+                </div>
             </div>
-            <div>
-                <label for="lastname">Nom :</label>
-                <input type="text" id="lastname" name="lastname" value="<?=$lastname?>" required>
-            </div>
-            <div>
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" value="<?=$email?>" required>
-            </div>
-            <div class="form-group  row">
-                <label for="password" class="col-sm-2 col-form-label">Mot de passe :</label>
-                <div class="col-sm-4">
+            <div class="form-group">
+                <div>
+                    <label for="password" class="col-sm-2 col-form-label">Mot de passe :</label>
                     <input type="password" value="" name="password" id="password" required>
                 </div>
-                <label for="passwordVerify" class="col-sm-2 col-form-label">Confirmez :</label>
-                <div class="col-sm-4">
+                <div>
+                    <label for="passwordVerify" class="col-sm-2 col-form-label">Confirmez :</label>
                     <input type="password" value="" name="passwordVerify" id="passwordVerify" required>
                 </div>
             </div>
@@ -30,34 +32,32 @@
                 <label for="address">Adresse :</label>
                 <input type="text" id="address" name="address" value="<?=$address?>" required>
             </div>
-            <div>
-                <label for="cp" class="">Code postal :</label>
-                <div class="">
+             <div class="form-group">
+                <div>
+                    <label for="cp" class="">Code postal :</label>
                     <input type="text" name="cp" id="cp" value="<?=$cp?>" required>
                 </div>
-                
-                <label for="city" class="">Ville :</label>
-                <div class="">
+                <div>
+                    <label for="city" class="">Ville :</label>
                     <input type="text" name="city" id="city" value="<?=$city?>" required>
                 </div>
-                <label for="country" class="">Pays :</label>
-                <div class="">
+                <div>
+                    <label for="country" class="">Pays :</label>
                     <input type="text" name="country" id="country" value="<?=$country?>" required>
                 </div>
             </div>
-            <div>
-                <label for="phone" class="">Téléphone :</label>
-                <div class="">
+             <div class="form-group">
+                <div>
+                    <label for="phone" class="">Téléphone :</label>
                     <input type="tel" id="phone" name="phone" value="<?=$phone?>" required>
                 </div>
-                <label for="birthdate" class="">Date de naissance :</label>
-                <div class="">
+                <div>
+                    <label for="birthdate" class="">Date de naissance :</label>
                     <input type="date" id="birthdate" name="birthdate" value="<?=$birthdate?>" required>
                 </div>
             </div>
-            <div class="text-center">
+           
                 <input type="submit" value="Créer votre compte" class="btn" >
-            </div>
+
         </form>
     </section>
-</main>

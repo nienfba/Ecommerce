@@ -37,7 +37,9 @@ class CreateController
             $createdDate = date('Y-m-d H:i:s');
 
             /** Ajout des données dans la BDD grâce au modèle */
-            $customerModel->add($formFields['firstname'], $formFields['lastname'], $formFields['email'], $password,  $formFields['address'], $formFields['cp'], $formFields['city'], $formFields['country'], $formFields['phone'], $createdDate, $formFields['birthdate']);
+            $customerId = $customerModel->add($formFields['firstname'], $formFields['lastname'], $formFields['email'], $password,  $formFields['address'], $formFields['cp'], $formFields['city'], $formFields['country'], $formFields['phone'], $createdDate, $formFields['birthdate']);
+            
+            $customer = $customerModel->find($customerId);
             /** Falshbag */
             /** On logue le client */
              // Construction de la session utilisateur.

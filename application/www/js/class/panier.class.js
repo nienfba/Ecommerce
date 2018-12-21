@@ -206,7 +206,10 @@ Panier.prototype.updateDisplayResume = function () {
         carTotalPrice += product.totalPrice;
     });
     this.quantityHtml.text(this.items.length);
-    this.priceHtml.text(formatMoneyAmount(carTotalPrice));
+    if (carTotalPrice > 0)
+        this.priceHtml.text(formatMoneyAmount(carTotalPrice));
+    else
+        this.priceHtml.text('');
 }
 
 /** Mise à jour de la quantité
@@ -243,8 +246,10 @@ Panier.prototype.displayCart = function () {
 
     let carTotalPrice = 0;
 
+
     /** Si on a le tableau dans le DOM alors on le met à jour */
     if (this.tableHtml.length) {
+
         this.tableHtml.empty();
         if (this.items.length > 0) {
             this.items.forEach((product, index) => {
@@ -264,6 +269,8 @@ Panier.prototype.displayCart = function () {
         }
 
         //Si pas d'item panier vide
+        /** On cache le buton commander si panier vide */
+        $('#cartSubmit').hide();
         this.tableHtml.append($('<tr>').append($('<td colspan="5">').text('Votre panier est vide')));
     }
 

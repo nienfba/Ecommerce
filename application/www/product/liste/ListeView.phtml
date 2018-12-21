@@ -1,6 +1,5 @@
-<main class="container">
+<section class="tea">
 <?php foreach($categories as $categorie):?>
-    <section class="tea">
         <img src="<?= $wwwUrl ?>/uploads/categories/<?=$categorie['cat_picture']?>" alt="Tasse de <?=$categorie['cat_name']?>" />
         <h2><span><?=$categorie['cat_name']?></span></h2>
         <p class="clear"><?=$categorie['cat_description']?></p>
@@ -31,6 +30,5 @@
                 </article>
             <?php endforeach;?>
         </section>
-    </section>
 <?php endforeach;?>
-</main>
+</section>
