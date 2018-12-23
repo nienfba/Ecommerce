@@ -14,6 +14,6 @@
 $config['autoload-chain'] = false;
 
 // List of all the intercepting filters classes.
-$config['intercepting-filters'] = ['UserSession'];
+$config['intercepting-filters'] = ['UserSession','OrderStatus'];
 
 $config['layouts'] = ['admin'=>'LayoutAdmin'];

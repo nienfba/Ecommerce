@@ -1,5 +1,5 @@
 <?php
-class OrderModel
+class OrdersModel
 {
 
     /**
@@ -30,7 +30,7 @@ class OrderModel
      */
     public function listAll() 
     {
-        return $this->dbh->query('SELECT * FROM '.$this->table.' INNER JOIN customer ON '.$this->table.'.customer_cust_id = customer.cust_id');
+        return $this->dbh->query('SELECT * FROM '.$this->table.' INNER JOIN customer ON '.$this->table.'.customer_cust_id = customer.cust_id ORDER BY ord_date DESC');
     }
 
     /** Ajoute une commande en base
@@ -42,10 +42,9 @@ class OrderModel
      * @param string $comment
      * @param string $customerId
      */
-    public function add($orderDate, $status, $dateShipped, $dateDelivery, $comment, $customerId) 
+    public function add($orderDate, $status, $datePayment, $dateShipped, $dateDelivery, $comment, $customerId) 
     {
-        //echo 'INSERT INTO '.$this->table.' (ord_date, ord_status, ord_dateShipped, ord_dateDelivery, ord_comment, customer_cust_id) VALUES (?,?,?,?,?,?)';exit();
-        return $this->dbh->executeSQL('INSERT INTO '.$this->table.' (ord_date, ord_status, ord_dateShipped, ord_dateDelivery, ord_comment, customer_cust_id) VALUES (?,?,?,?,?,?)',[$orderDate, $status, $dateShipped, $dateDelivery, $comment, $customerId]);
+        return $this->dbh->executeSQL('INSERT INTO '.$this->table.' (ord_date, ord_status, ord_datePayment, ord_dateShipped, ord_dateDelivery, ord_comment, customer_cust_id) VALUES (?,?,?,?,?,?)',[$orderDate, $status, $datePayment, $dateShipped, $dateDelivery, $comment, $customerId]);
     }
 
     /** Trouve une commande avec son ID
@@ -89,9 +88,9 @@ class OrderModel
      * @param string $comment
      * @param string $customerId
      */
-    public function update($id, $status, $dateShipped, $dateDelivery, $comment, $customerId)
+    public function update($id, $status, $datePayment, $dateShipped, $dateDelivery, $comment, $customerId)
     {
-        $this->dbh->executeSQL('UPDATE '.$this->table.' SET ord_status=?, ord_dateShipped=?,ord_dateDelivery=?,ord_comment=?,customer_cust_id=? WHERE ord_id=?',[$status, $dateShipped, $dateDelivery, $comment, $customerId, $id]); 
+        $this->dbh->executeSQL('UPDATE '.$this->table.' SET ord_status=?, ord_datePayment=?, ord_dateShipped=?,ord_dateDelivery=?,ord_comment=?,customer_cust_id=? WHERE ord_id=?',[$status, $datePayment, $dateShipped, $dateDelivery, $comment, $customerId, $id]); 
     }
 
      /** Modifie le status d'une commande

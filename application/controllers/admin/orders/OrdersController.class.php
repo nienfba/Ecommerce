@@ -1,22 +1,24 @@
 <?php
 
-class AdminController
+class OrdersController
 {
+    
     public function httpGetMethod(Http $http, array $queryFields)
     {
 		/** On sélectionne les commandes en bases par ordre de date décroissant 
 		 * TO DO !
-		*/
+        */
+
         $orderModel = new OrdersModel();
         $orders = $orderModel->listAll();
 
-        
-		
+        $flashbag = new FlashBag();
 
         return [
-            'title' => "Accueil - Dashboard",
-            'active' => "home",
-            'orders'=>$orders
+            'title' => "Toutes les commandes",
+            'active' => "order",
+            'orders'=> $orders,
+            'flashbag'=> $flashbag->fetchMessages()
         ];
 		
     }

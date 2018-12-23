@@ -4,19 +4,19 @@
         <h1>Merci pour votre commande</h1>
         <h2><span>Commande n°<?=$order['ord_id'];?></span></h2>
         
-        <?php if ($order['ord_status'] == PaymentController::PAYMENT_PENDING_CHECK):?>
+        <?php if ($order['ord_status'] == OrderStatus::PAYMENT_PENDING_CHECK):?>
             <p>Nous attendons votre chèque à l'adresse :</p>
             <p>CUP OF TEA <br />13 Avenue du thé <br /> 75003 Paris</p>
             <p>Merci de l'adresser à l'ordre de "Cup Of Tea"</p>
             <P>Votre commande sera expédiée dès réception de votre chèque de <?=number_format($orderTotal,2)?> €</p>
-        <?php elseif ($order['ord_status'] == PaymentController::PAYMENT_PENDING_TRANSFERT):?>
+        <?php elseif ($order['ord_status'] == OrderStatus::PAYMENT_PENDING_TRANSFERT):?>
             <p>Nous attendons votre virement à l'adresse Bancaire suivante :</p>
             <h3>IBAN : FR 234554456567487687684</h3>
             <P>Votre commande sera expédiée dès réception de votre virement de <?=number_format($orderTotal,2)?> €</p>  
-        <?php elseif ($order['ord_status'] == PaymentController::PAYMENT_VALID_CB):?>
+        <?php elseif ($order['ord_status'] == OrderStatus::PAYMENT_VALID_CB):?>
             <h3>Votre paiement par CB de <?=number_format($orderTotal,2)?> € a bien été validé</h3>
             <P>Votre commande sera expédiée dès que nous en aurons le temps ;)</p>  
-        <?php elseif ($order['ord_status'] == PaymentController::PAYMENT_ERROR_CB):?>
+        <?php elseif ($order['ord_status'] == OrderStatus::PAYMENT_ERROR_CB):?>
             <h3>Votre paiement par CB de <?=number_format($orderTotal,2)?> € a été refusé</h3>
             <P>Votre commande ne sera jamais expédié. A moins que le développeur ne vous permette un jour de refaire un paiement !</p> 
         <?php endif;?>

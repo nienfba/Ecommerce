@@ -1,0 +1,42 @@
+<!-- Formulaire de saisie d'un nouvel article -->
+<?php if ($errorMessage != ''):?>
+    <div class="alert alert-danger"><?=$errorMessage?></div>
+<?php endif; ?>
+<h2>Commande N°<?=$id?></h2>
+<p> Date de commande : <?=$date?>
+<form action="<?= $requestUrl ?>/admin/orders/update/" method="post">
+        <div class="form group">
+            <label for="status">Status de la commande : </label>
+            <select name="status">
+                <?=OrderStatus::getStatusOption($status);?>
+            </select>
+            <small class="form-text text-muted">Mettez à jour la date de paiement an cas de paiement validé !</small>
+        </div>
+        <div class="form group row">
+            <div class="col-sm-3">
+                <label for="datePayment">Date de paiement :</label>
+                <input class="form-control" type="date" id="datePayment" name="datePayment" value="<?=$datePayment?>">
+            </div>
+            <div class="col-sm-3">
+                <label for="dateShipped">Date d'expédition :</label>
+                <input class="form-control" type="date" id="dateShipped" name="dateShipped" value="<?=$dateShipped?>">
+            </div>
+            <div class="col-sm-3">
+                <label for="dateDelivery">Date de livraison :</label>
+                <input class="form-control" type="date" id="dateDelivery" name="dateDelivery" value="<?=$dateDelivery?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="comment">Ajouter un commentaire :</label>
+            <input class="form-control" id="comment" name="comment" value="">
+            <input type="hidden" value="<?=$comment?>" name="commentOld">
+            <p><?=$comment?></p>
+        </div>
+        <div class="text-center">
+            <a href="<?= $requestUrl ?>/admin/orders/" class="btn btn-outline-dark" role="button">Annuler</a>
+            <input type="submit" value="Enregistrer" class="btn btn-outline-success" >
+        </div>
+
+        <input type="hidden" name="id" value="<?=$id?>">
+        <input type="hidden" name="customerId" value="<?=$customerId?>">
+</form>

@@ -2,29 +2,6 @@
 
 class OrderController
 {
-     /**
-     * STATUS DES COMMANDES GERES PAR L'APPLICATION
-     * Ce n'est pas optimal. Il faudrait une table payment pour enregistrer les paiement.
-     * Mais ici on va gérer simplement
-     * 
-     * ORDER_PENDING : commande en attente
-     * PAYMENT_PENDING_CHECK : payment par chèqe en attente
-     * PAYMENT_VALID_CHECK : paiement par chèque validé
-     * PAYMENT_PENDING_TRANSFERT : payment par virement en attente
-     * PAYMENT_VALID_TRANSFERT : paiement par virement validé
-     * PAYMENT_PENDING_CB : paiement par cd validé
-     * PAYMENT_VALID_CB : paiement par cd validé
-     * PAYMENT_ERROR_CB : paiement par cb error
-     */
-    const ORDER_PENDING = 0;
-    const PAYMENT_PENDING_CHECK = 1;
-    const PAYMENT_VALID_CHECK = 2;
-    const PAYMENT_PENDING_TRANSFERT = 3;
-    const PAYMENT_VALID_TRANSFERT = 4;
-    const PAYMENT_PENDING_CB = 5;
-    const PAYMENT_VALID_CB = 6;
-    const PAYMENT_ERROR_CB = 7;
-
     public function httpGetMethod(Http $http, array $queryFields)
     {
         /** On est redirigé ici une fois la commande enregistrée en base
@@ -45,7 +22,7 @@ class OrderController
         /** On va chercher ici une commande avec son numéro mais aussi le numéro client
          * Comme ça pas de risque de piratage par num de commande 
          */
-        $orderModel = new OrderModel();
+        $orderModel = new OrdersModel();
         $order = $orderModel->findByIdAndCustomer($orderId,$idCustomer);
 
         if($order)
@@ -57,7 +34,7 @@ class OrderController
             }
             else
             {
-                $orderdetailModel = new OrderdetailModel();
+                $orderdetailModel = new OrdersdetailModel();
                 $orderDetails = $orderdetailModel->findByOrder($orderId);
                 $orderTotal = $orderdetailModel->getTotalPrice($orderId);
                 return [ 
@@ -92,10 +69,10 @@ class OrderController
             $orderId = $userSession->getOrderId();
             
             /** Model des commandes */
-            $orderModel = new OrderModel();
+            $orderModel = new OrdersModel();
             
             /** Model des lignes de commandes */
-            $orderdetailModel = new OrderdetailModel();
+            $orderdetailModel = new OrdersdetailModel();
 
             /** Pour le moment on a pas trouvé une commande existante */
             $order = false;
@@ -111,7 +88,7 @@ class OrderController
                 $orderdetailModel->deletebyOrder($orderId);
             }
             else
-                 $orderId = $orderModel->add(date('Y-m-d h:i:s'),self::ORDER_PENDING, null, null, '', $idCustomer);
+                 $orderId = $orderModel->add(date('Y-m-d h:i:s'),OrderStatus::ORDER_PENDING, null, null, null, '', $idCustomer);
                
             /** On ajoute les détails des lignes commande
              * 
