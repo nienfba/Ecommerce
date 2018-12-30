@@ -25,10 +25,6 @@ class OrderStatus
     const PAYMENT_VALID_CB = 6;
     const PAYMENT_ERROR_CB = 7;
 
-	public function __construct()
-	{
-    }
-
     public static function getStatusText($status)
     {
         switch ($status)
@@ -46,7 +42,7 @@ class OrderStatus
                 return 'Attente de paiement par virement';
                 break;  
             case self::PAYMENT_VALID_TRANSFERT:
-                return 'Paiement validé par transfert';
+                return 'Paiement validé par virement';
                 break;  
             case self::PAYMENT_PENDING_CB:
                 return 'Attente de paiement par CB';
@@ -60,7 +56,7 @@ class OrderStatus
         }
     }
 
-    /** Return an HTML option liste for formuliare update */
+    /** Return an HTML option liste for form update */
     public static function getStatusOption($currentStatus)
     {
         $oClass = new ReflectionClass(__CLASS__);

@@ -17,3 +17,4 @@ $config['autoload-chain'] = false;
 $config['intercepting-filters'] = ['UserSession','OrderStatus'];
 
 $config['layouts'] = ['admin'=>'LayoutAdmin'];
+
