@@ -26,6 +26,9 @@ class CreateController
                 if ($formField == '')
                     throw new DomainException('Merci de remplir tous les champs !');
             }
+            if($customerModel->findByEmail($formFields['email']) !== false)
+                throw new DomainException('Cet email est déjà utilisé. Merci de créer un compte avec une autre adresse de vous connecter avec votre email.');
+
             /** Password et passwordverify */
             if($formFields['password'] != $formFields['passwordVerify'])
                  throw new DomainException('Erreur de confirmation de mot de passe !');

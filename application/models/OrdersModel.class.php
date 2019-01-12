@@ -44,7 +44,7 @@ class OrdersModel
      */
     public function add($orderDate, $status, $datePayment, $dateShipped, $dateDelivery, $comment, $customerId) 
     {
-        return $this->dbh->executeSQL('INSERT INTO '.$this->table.' (ord_date, ord_status, ord_datePayment, ord_dateShipped, ord_dateDelivery, ord_comment, customer_cust_id) VALUES (?,?,?,?,?,?)',[$orderDate, $status, $datePayment, $dateShipped, $dateDelivery, $comment, $customerId]);
+        return $this->dbh->executeSQL('INSERT INTO '.$this->table.' (ord_date, ord_status, ord_datePayment, ord_dateShipped, ord_dateDelivery, ord_comment, customer_cust_id) VALUES (?,?,?,?,?,?,?)',[$orderDate, $status, $datePayment, $dateShipped, $dateDelivery, $comment, $customerId]);
     }
 
     /** Trouve une commande avec son ID

@@ -27,7 +27,7 @@ class OrderController
 
         if($order)
         {
-            if($order['ord_status'] !=  self::ORDER_PENDING)
+            if($order['ord_status'] !=  OrderStatus::ORDER_PENDING)
             {
                 /** Si la commande n'est plus en attente on redirige vers la page de payment */
                 $http->redirectTo('/order/payment/');

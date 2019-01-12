@@ -37,7 +37,7 @@ class EditController
             }
             /** Password et passwordverify */
             if($formFields['password'] != $formFields['passwordVerify'])
-                    throw new DomainException('Erreur de confirmation de mot de passe !');
+                throw new DomainException('Erreur de confirmation de mot de passe !');
 
             /** On hash le mot de passe s'il n'est pas vide sinon NULL */
             if($formFields['password']!= '')

@@ -20,12 +20,12 @@ class PaymentController
                 $orderId = $queryFields['orderId'];
 
             /** Model des commandes */
-            $orderModel = new OrderModel();
+            $orderModel = new OrdersModel();
             
             /** On vérifie si on a la commande en base */
             if($order = $orderModel->findByIdAndCustomer($orderId,$idCustomer))
             {
-                $orderdetailModel = new OrderdetailModel();
+                $orderdetailModel = new OrdersdetailModel();
                 $orderTotal = $orderdetailModel->getTotalPrice($orderId);
 
                 /** On valide un payement en attente s'il n'y en pas déjà eu ici ! */
