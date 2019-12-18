@@ -30,7 +30,7 @@ class AddController
             }
 
             /** On vérifie que le client n'est pas déjà dans la base */
-            if($customerModel->findByEmail($formFields['email']) !== false))
+            if($customerModel->findByEmail($formFields['email']) !== false)
                 throw new DomainException('Cet email est déjà utilisé. Merci de créer un compte avec une autre adresse ou de modifier le client existant.');
 
 

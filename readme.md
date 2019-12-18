@@ -18,6 +18,12 @@ To begin using this e-commerce system :
 * Create Database `cupoftea` on phpmyadmin and import `./cupoftea.sql`
 * Configure file application/config/database.php with your database access
 
+# TODO
+* Secure admin access
+* Order view in Admin
+* Order front process not real - add payment CB emulation
+* Debugs and tests 
+
 # Documentation
 
 ## Créer un contrôleur
