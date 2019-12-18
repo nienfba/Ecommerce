@@ -14,7 +14,7 @@
 
 # Download and Installation
 To begin using this e-commerce system :
-* Clone the repo on your web folder : `git clone https://github.com/nienfba/tmpMA20.git` YOUR_FOLDER/ or download the ZIP file and extract !
+* Clone the repo on your web folder : `git clone https://github.com/nienfba/Ecommerce.git YOUR_FOLDER/` or download the ZIP file and extract !
 * Create Database `cupoftea` on phpmyadmin and import `./cupoftea.sql`
 * Configure file application/config/database.php with your database access
 
