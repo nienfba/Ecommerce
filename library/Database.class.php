@@ -33,7 +33,7 @@ class Database
 	/**
 	 * @var PDO instance d'une connexion PDO
 	 */
-	static $pdo;
+	static private $pdo;
 
 	/** Constructeur de la classe Database
 	 * 
@@ -92,7 +92,7 @@ class Database
 	 * 
 	 * @param string $sql requête sql a executer
 	 * @param array $values tableaux associatif ou indexé des valeurs à passer à l'execution de la requête
-	 * @return array jeu d'enregistrement la première ligne
+	 * @return array jeu d'enregistrement : la première ligne
 	 */
     public function queryOne($sql, array $criteria = array())
     {

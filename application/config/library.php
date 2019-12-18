@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Library configuration settings.
  */

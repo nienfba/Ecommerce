@@ -13,11 +13,11 @@ class FrontController
         }
         else
         {
-            //On cherche dans la configuration si on a un layout pour le répertoire racine courant !
+            //FABIEN - On cherche dans la configuration si on a un layout pour le répertoire racine courant !
             $racineDirectory = $this->http->getRacineDirectory();
             $configuration = new Configuration();
-            $layouts = $configuration->get('library', 'layouts');
-            if($racineDirectory != '' && array_key_exists($racineDirectory,$layouts))
+            $layouts = $configuration->get('library', 'layouts', null);
+            if($racineDirectory != '' && !is_null($layouts) && array_key_exists($racineDirectory,$layouts))
                 $this->layout = $layouts[$racineDirectory].'View.phtml';
             else
                 $this->layout = 'LayoutView.phtml';

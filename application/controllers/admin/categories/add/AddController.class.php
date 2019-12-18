@@ -28,7 +28,6 @@ class AddController
             else 
                 $picture = NULL;
 
-
             /** Vérification des données 
              * C'est le contrôleur qui contrôle les données et non le modèle !
              * Si les champs sont vides on lance un exception pour réafficher le formulaire et les erreurs !

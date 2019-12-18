@@ -5,7 +5,7 @@
 const KEY_SSL = 'YourAreBeautifulPeople';
 
 const ID_BANQUE = "3waBanqueSecure";
-const VALIDE_ID_SITE = ['cupOfTea'];
+const VALIDE_ID_SITE = ['restaurant'];
 
 $iv = 'rioz$345FDSD324R'; // vecteur d'initialisation cryptSSL
 
@@ -43,7 +43,7 @@ try {
   {
       // on récupère les données de sécurisation
       $request = verifData($_POST['key'],$_POST['data'],$key,$urlBack);
-      //traitement du paiement et rediretion vers la page de validation du site
+      //traitement du paiement et rediretion vers la page de validatio%n du site
       switch($_POST['numCb'])
       {
         case '0000000000000000':
@@ -96,7 +96,7 @@ try {
   <?php elseif ($returnPaiement == 1) :?>
     <p>Votre paiement a été accepté</p>
   <?php endif;?>
-  <p><href="<?=$responseURL?>">Retour au site</a></p>
+  <p><a href="<?=$responseURL?>">Retour au site</a></p>
 <?php endif;?>
 
 </html>
